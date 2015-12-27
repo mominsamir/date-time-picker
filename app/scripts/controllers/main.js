@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the dateTimePickerApp
  */
-angular.module('dateTimePickerApp')
+angular.module('dateTimePicker')
   .controller('MainCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

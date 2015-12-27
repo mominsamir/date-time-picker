@@ -1,89 +1,188 @@
-// bower:scss
-// endbower
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import '_date_picker.scss';
 
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+$body-bg : #e2e0e0;
+
+
+*{
+  margin :0px;
+  padding :0px;
+  font-family: 'Roboto', sans-serif;
 }
 
-body {
-  padding: 0;
+.body-bg{
+  background : $body-bg;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
+
+
+.card-title-bg	{
+	background-color: #FAFAFA;
+	border-bottom: 1px solid rgb(239, 233, 233);
 }
 
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
+.card-title-bg-white{
+/* 	background-color: #fff;
+	color: grey; */
+}
 
-  /* Make the masthead heading the same height as the navigation */
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
+.md-sidenav-left{
+  height:100vh;
+  min-height: 100vh;
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+
+.right-container{
+  min-height:100vh;
+  height: 100vh;
+  overflow-y:auto;
+  overflow-x:hidden;
+  background : $body-bg; 
+}
+
+.main-container{
+  padding: 16px;
+  height:100vh;
+  background:$body-bg;
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+
+.stretch-100 {
+  height: 100vh;
+  width: 100%;
+}
+
+.login-margin{
+  margin-top:10%;
+}
+
+.bottom{
+  border-bottom: 1px solid #F1F1F1;
+}
+
+
+#vertical-container {
+  height: 280px;
+  width: 260px; }
+.repeated-item {
+  box-sizing: border-box;
+  height: 40px;
+  padding-top: 10px; }
+.md-content {
+  margin: 16px; }
+.md-virtual-repeat-container .md-virtual-repeat-offsetter {
+  padding-left: 16px; 
+}
+
+// increase height of loading bar to match tool bar and set z index to 59 to stay it below side nav
+
+#loading-bar .peg, .bar{
+  height: 65px !important;
+  z-index: 59 !important;
+}
+
+#loading-bar .bar{
+  background: #767676;
+  opacity: .6;
+}
+@media only screen and (min-width: 0) and (max-width: 959px) and (orientation: portrait){
+  #loading-bar .peg, .bar{
+    height: 56px !important;
+    z-index: 59 !important;
   }
 }
 
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
+@media only screen and (min-width: 0) and (max-width: 959px) and (orientation: landscape) {
+  #loading-bar .peg, .bar{
+    height: 48px !important;
+    z-index: 59 !important;
+  }
+  
 }
 
-.container-narrow > hr {
-  margin: 30px 0;
-}
 
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
+@media only screen and (min-width: 0) and (max-width: 959px) and (orientation: portrait) {
+  .login-dailog{
+    height: 100%;
+    min-height: 100%;
   }
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
 
-  p + h4 {
-    margin-top: 28px;
+md-card.back-color, md-content.back-color{
+  &.red{
+    background-color: #F44336;
+    color:#FDFFFF;    
+  }
+  &.pink{
+    background-color: #E91E63;
+    color:#F9F0FF;    
+  }
+  &.purple{
+    background-color: #9C27B0;
+    color:#D9D6F2;
+  }
+  &.deep-purple{
+    background-color: #673AB7;
+    color: #E7E0F1;
+  }
+  &.indigo{
+    background-color: #3F51B5;
+    color: #E1E3F3;    
+  }      
+  &.blue{
+    background-color: #2196F3;
+    color: #F8FBFE;    
+  }      
+  &.light-blue{
+    background-color: #03A9F4;
+  }      
+  &.cyan{
+    background-color: #00BCD4;
+  }      
+  &.teal{
+    background-color: #009688;
+  }     
+  &.green{
+    background-color: #4CAF50;
+  }
+  &.light-green{
+    background-color: #8BC34A;
+  }
+  &.lime{
+    background-color: #CDDC39;
+  }  
+  &.yellow{
+    background-color: #FFEB3B;
+  }
+  &.amber{
+    background-color: #FFC107;
+  }
+  &.orange{
+    background-color: #FF9800;
+  }  
+  &.deep-orange{
+    background-color: #FF5722;
+  }
+  &.brown{
+    background-color: #795548;
+  }
+  &.grey{
+    background-color: #9E9E9E;
+  }      
+  &.blue-grey{
+    color:#FDFFFF;    
+    background-color: #607D8B;
   }
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
 
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
-}
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-30 { font-size: 30px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }

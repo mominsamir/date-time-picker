@@ -8,48 +8,67 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="dateTimePickerApp">
+  <body ng-app="dateTimePicker">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-
-            <a class="navbar-brand" href="#/">dateTimePicker</a>
-          </div>
-
-          <div class="collapse">
-
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-            </ul>
-          </div>
+<md-content class="container" layout="row" ng-init="toogle = false">
+  <md-sidenav 
+    layout="column" 
+    class="md-sidenav-left md-whiteframe-z2" 
+    md-component-id="left" 
+    md-is-locked-open="$mdMedia('gt-md')">
+      <div class="profile bg-profile" >
+        <div layout="row" >
+            <img class="profile-img" src="" alt="Dummy">
         </div>
+        <div layout="row" layout-padding >
+            <span flex></span>
+            <span class="profile-name"  layout-align="center center">{{vm.user.name}}</span>
+            <span flex></span>
+            <span aria-hidden="true" ng-click="toogle = toogle ? false: true;" class="material-icons" ng-class="{'show': toogle}">keyboard_arrow_down</span>
+        </div>
+        
+        <div ng-show="toogle" layout="row" class="profile-details"  ng-class="{'detail-show': toogle}">
+            <div flex >
+              <span class="material-icons">info</span>
+            </div>
+            <div   flex>
+              <span class="material-icons">email</span>
+            </div>
+            <div   flex >
+              <span class="material-icons">star</span>
+            </div>
+        </div>  
       </div>
-    </div>
-
-    <div class="container">
-    <div ng-view=""></div>
-    </div>
-
-    <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+  </md-sidenav>
+  <md-content layout="column" layout-fill class="right-container">
+    <md-toolbar layout="row"  class="md-whiteframe-z2 animated fadeInDown md-accent" >
+      <div class="md-toolbar-tools" >
+        <span class="md-headline">Gasjobber</span>
+        <md-button aria-label="Open Sidebar" hide-gt-md class="md-icon-button" ng-click="vm.toggleLeft()">
+            <md-icon md-menu-align-target md-font-icon="material-icons" >menu</md-icon>
+        </md-button>        
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="log out" ng-click="vm.logout()" >
+            <md-icon md-menu-align-target md-font-icon="material-icons" >exit_to_app</md-icon>
+        </md-button>
       </div>
-    </div>
-
+    </md-toolbar>
+    <md-content layout="column" class="main-container animated fadeInUpBig" flex >
+          <div ng-view></div>             
+    </md-content>
+  </md-content>
+</md-content>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -71,13 +90,17 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
+        <script src="picker/calender.js"></script>
+        <script src="picker/datepicker.js"></script>
         <!-- endbuild -->
 </body>
 </html>

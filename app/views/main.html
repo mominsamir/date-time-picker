@@ -1,23 +1,26 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
-
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>
+<md-content layout="row">
+<div layout  layout-sm="column" layout-xs="column"> 
+        <gj-date-time-picker 
+            fname="dateOfBirth" 
+            lable="dateOfBirth"
+            form="empForm" 
+            value="vm.employee.dateOfBirth" 
+            flex-size="20"                         
+            is-required="{{true}}" 
+            format="MM-DD-YYYY HH:mm"
+            mode="date-time" 
+            week-start-day="Sunday">
+        </gj-date-time-picker>
+        <gj-date-time-picker 
+            fname="joiningDate" 
+            lable="joiningDate"
+            form="empForm" 
+            value="vm.employee.joiningDate" 
+            data-start-date="10-15-2015"
+            flex-size="20"                         
+            is-required="{{true}}" 
+            format="MM-DD-YYYY" 
+            week-start-day="Sunday">
+        </gj-date-time-picker>        
+</div>    
+</md-content>
