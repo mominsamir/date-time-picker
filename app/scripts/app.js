@@ -18,8 +18,8 @@ angular
     'ui.router',
     'ngMaterial'
   ])
-  .config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/');
+  .config(function ($stateProvider, $urlRouterProvider,$mdThemingProvider) {
+    $urlRouterProvider.otherwise('/home');
 
     $stateProvider.state('home', {
             url: '/home',  
@@ -46,6 +46,6 @@ angular
                 title: 'Dashboard',
             }            
     });
-
-
+    $mdThemingProvider.theme('default')
+        .primaryPalette('teal');
   });

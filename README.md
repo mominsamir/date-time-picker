@@ -1,16 +1,9 @@
-# date-time-picker
-<<<<<<< HEAD
+Date Time Picker
+=============
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.15.1.
+Date and time picker based on Angular material and momentjs. 
 
-## Build & development
+## Demo and Docs
 
-Run `grunt` for building and `grunt serve` for preview.
+See https://mominsamir.github.io/date-time-picker for more information.
 
-## Testing
-
-Running `grunt test` will run the unit tests with karma.
-=======
-date time picker material desing
->>>>>>> b60612671a6f99db37ec19c6cb6dafae831e0b3d

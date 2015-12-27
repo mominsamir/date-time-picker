@@ -56,33 +56,24 @@ $disabled-date-text-color:		#ede8e8;
 				.year-container{
 				   -webkit-animation: fadeInDown 1s cubic-bezier(.06,.61,.04,1.03);
 				   animation: scaleUpCal 1s cubic-bezier(.06,.61,.04,1.03);
-					.year-header{
-						height: 45px;
-						span{
-							color:grey;
-							font-size: 15px;
-							font-weight: bold;
-							line-height: 45px;
-						}
-					}							      				
 					.year-md-repeat{
-						height: 270px;
+						height: 315px;
+						margin-top:20px;
 						.md-virtual-repeat-container{
 							text-align: center;
-							width: 240px;
+							width: 2r40px;
 							height: $container-height;
 						}				
 						.repeated-item {
 							box-sizing: border-box;
-							height: 39px;
+							height: 45px;
 							padding-top: 10px;
-							md-button{
+							.md-button{
+							  color : rgb(34, 34, 34);
 							  outline: none;
-							  width: 270px;
-							  height: $date-cell-height;
 							  cursor: pointer;
 							  font-weight: bold;
-							  font-size: 20px;
+							  font-size: 16px;
 							  text-align: center;							  
 							}
 
@@ -116,6 +107,7 @@ $disabled-date-text-color:		#ede8e8;
 						border-radius:50%;
 						font-size: $font-size;
 						outline: none;
+						color: rgb(34, 34, 34);
 						&.active{
 							cursor: pointer;
 							&:hover{
@@ -129,7 +121,7 @@ $disabled-date-text-color:		#ede8e8;
 								background-color: inherit;
 							}					
 						}
-						&.today{
+						&.today:not(.disabled){
 							border:1px solid $today-border-color;
 						}
 						&.selected:not(.disabled){
@@ -186,9 +178,7 @@ $disabled-date-text-color:		#ede8e8;
 						}				
 						.repeated-item {
 							box-sizing: border-box;
-							height: 39px;
 							padding-top: 10px;
-							font-weight: bold;
 							span{
 							  outline: none;
 							  border-radius: 50%;
@@ -213,7 +203,7 @@ $disabled-date-text-color:		#ede8e8;
 			}
 
 			.md-virtual-repeat-container .md-virtual-repeat-scroller{
-				right: -20px;
+				right: -21px;
 				padding-right:20px;
 			}
 			.slideLeft{
