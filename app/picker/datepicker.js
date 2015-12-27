@@ -268,7 +268,7 @@ RangePickerCtrl.prototype.preDefineDate = function(p){
 
 
 var app = angular.module('dateTimePicker');
-app.directive('gjDateTimePicker',['$mdMedia','$document',DateTimePicker]);
+app.directive('dateTimePicker',['$mdMedia','$document',DateTimePicker]);
 
 
 })();

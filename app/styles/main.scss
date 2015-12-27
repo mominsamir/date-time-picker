@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import '_date_picker.scss';
 @import '_animation.scss';
+@import '_side-menu.scss';
 
 $body-bg : #e2e0e0;
 
@@ -16,17 +17,6 @@ $body-bg : #e2e0e0;
   background : $body-bg;
 }
 
-
-
-.card-title-bg	{
-	background-color: #FAFAFA;
-	border-bottom: 1px solid rgb(239, 233, 233);
-}
-
-.card-title-bg-white{
-/* 	background-color: #fff;
-	color: grey; */
-}
 
 .md-sidenav-left{
   height:100vh;
@@ -51,135 +41,10 @@ $body-bg : #e2e0e0;
   overflow-x:hidden;
 }
 
-.stretch-100 {
-  height: 100vh;
-  width: 100%;
-}
 
-.login-margin{
-  margin-top:10%;
-}
-
-.bottom{
-  border-bottom: 1px solid #F1F1F1;
-}
-
-
-#vertical-container {
-  height: 280px;
-  width: 260px; }
-.repeated-item {
-  box-sizing: border-box;
-  height: 40px;
-  padding-top: 10px; }
 .md-content {
-  margin: 16px; }
-.md-virtual-repeat-container .md-virtual-repeat-offsetter {
-  padding-left: 16px; 
+  margin: 16px; 
 }
-
-// increase height of loading bar to match tool bar and set z index to 59 to stay it below side nav
-
-#loading-bar .peg, .bar{
-  height: 65px !important;
-  z-index: 59 !important;
-}
-
-#loading-bar .bar{
-  background: #767676;
-  opacity: .6;
-}
-@media only screen and (min-width: 0) and (max-width: 959px) and (orientation: portrait){
-  #loading-bar .peg, .bar{
-    height: 56px !important;
-    z-index: 59 !important;
-  }
-}
-
-@media only screen and (min-width: 0) and (max-width: 959px) and (orientation: landscape) {
-  #loading-bar .peg, .bar{
-    height: 48px !important;
-    z-index: 59 !important;
-  }
-  
-}
-
-
-@media only screen and (min-width: 0) and (max-width: 959px) and (orientation: portrait) {
-  .login-dailog{
-    height: 100%;
-    min-height: 100%;
-  }
-}
-
-
-md-card.back-color, md-content.back-color{
-  &.red{
-    background-color: #F44336;
-    color:#FDFFFF;    
-  }
-  &.pink{
-    background-color: #E91E63;
-    color:#F9F0FF;    
-  }
-  &.purple{
-    background-color: #9C27B0;
-    color:#D9D6F2;
-  }
-  &.deep-purple{
-    background-color: #673AB7;
-    color: #E7E0F1;
-  }
-  &.indigo{
-    background-color: #3F51B5;
-    color: #E1E3F3;    
-  }      
-  &.blue{
-    background-color: #2196F3;
-    color: #F8FBFE;    
-  }      
-  &.light-blue{
-    background-color: #03A9F4;
-  }      
-  &.cyan{
-    background-color: #00BCD4;
-  }      
-  &.teal{
-    background-color: #009688;
-  }     
-  &.green{
-    background-color: #4CAF50;
-  }
-  &.light-green{
-    background-color: #8BC34A;
-  }
-  &.lime{
-    background-color: #CDDC39;
-  }  
-  &.yellow{
-    background-color: #FFEB3B;
-  }
-  &.amber{
-    background-color: #FFC107;
-  }
-  &.orange{
-    background-color: #FF9800;
-  }  
-  &.deep-orange{
-    background-color: #FF5722;
-  }
-  &.brown{
-    background-color: #795548;
-  }
-  &.grey{
-    background-color: #9E9E9E;
-  }      
-  &.blue-grey{
-    color:#FDFFFF;    
-    background-color: #607D8B;
-  }
-}
-
 
 
 .material-icons.md-18 { font-size: 18px; }

@@ -1,0 +1,26 @@
+<md-content layout="row" class="md-whiteframe-z2" layout-padding>
+    <div layout  layout-sm="column" layout-xs="column"> 
+            <date-time-picker 
+                fname="Date of Birth" 
+                lable="Date of Birth"
+                form="empForm" 
+                value="vm.employee.dateOfBirth" 
+                flex-size="50"                         
+                is-required="{{true}}" 
+                format="MM-DD-YYYY HH:mm"
+                mode="date-time" 
+                week-start-day="Sunday">
+            </date-time-picker>
+            <date-time-picker 
+                fname="Date of Joining" 
+                lable="joiningDate"
+                form="empForm" 
+                value="vm.employee.joiningDate" 
+                data-start-date="10-15-2015"
+                flex-size="50"                         
+                is-required="{{true}}" 
+                format="MM-DD-YYYY" 
+                week-start-day="Sunday">
+            </date-time-picker>        
+    </div>    
+</md-content>
