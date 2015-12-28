@@ -80,7 +80,7 @@ function RangePickerInput($document){
 
 function DateTimePicker($mdUtil,$mdMedia,$document){
     return {
-      restrict : 'EA',
+      restrict : 'E',
       replace:true,
       scope :{
         status : '=',
@@ -140,6 +140,7 @@ function DateTimePicker($mdUtil,$mdMedia,$document){
             if(e.which===9){
               cElement.removeClass('show').addClass('hide');
               angular.element(inputPane).focus();
+              $mdUtil.enableScrolling();      
             }
         });
 
@@ -163,11 +164,11 @@ function DateTimePicker($mdUtil,$mdMedia,$document){
         // recieve selected Date from Calender 
         scope.receiveSelectedDate = function(d){
           if(d===null){
-            cElement.removeClass('show').addClass('hide');      
-            return;
+            cElement.removeClass('show').addClass('hide');
+          }else{
+            scope.value =d.format(scope.format);
+            cElement.removeClass('show').addClass('hide');
           }
-           scope.value =d.format(scope.format);
-          cElement.removeClass('show').addClass('hide');
           $mdUtil.enableScrolling();      
         }
 
@@ -176,7 +177,7 @@ function DateTimePicker($mdUtil,$mdMedia,$document){
           calenderPane.parentNode.removeChild(calenderPane);
         });
 
-        
+
         function destroyCalender(){
           calenderPane.parentNode.removeChild(calenderPane);
       }

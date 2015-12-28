@@ -55,8 +55,8 @@ $disabled-date-text-color:		#ede8e8;
 				padding :0 6px;
 				height: 325px;
 				.year-container{
-				   -webkit-animation: fadeInDown 1s cubic-bezier(.06,.61,.04,1.03);
-				   animation: scaleUpCal 1s cubic-bezier(.06,.61,.04,1.03);
+				   -webkit-animation: slideInDown 1s cubic-bezier(.06,.61,.04,1.03);
+				   animation: slideInDown 1s cubic-bezier(.06,.61,.04,1.03);
 					.year-md-repeat{
 						height: 315px;
 						margin-top:20px;
@@ -81,6 +81,7 @@ $disabled-date-text-color:		#ede8e8;
 					}
 				}
 				.date-container{
+					animation: slideInUp 1s cubic-bezier(.06,.61,.04,1.03);		
 					.navigation{
 						height: calc($date-cell-height+3);
 						> .period-selector{
@@ -146,11 +147,12 @@ $disabled-date-text-color:		#ede8e8;
 					}				   
 				}
 				.hour-container{
-				   -webkit-animation: slideInUp 1s cubic-bezier(.06,.61,.04,1.03);
-				   animation: slideInUp 1s cubic-bezier(.06,.61,.04,1.03);  
+					overflow-y: hidden;
+					max-height: 450px; /* approximate max height */
 					width: 140px;
-					padding-left:60px;		
-					.hour-header{
+ 					padding-left:60px;
+ 					animation: slideInUp 1s cubic-bezier(.06,.61,.04,1.03);		
+						.hour-header{
 						height: 45px;
 						span{
 							color:grey;
