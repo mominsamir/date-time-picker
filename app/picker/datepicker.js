@@ -146,7 +146,7 @@ function DateTimePicker($mdMedia,$document){
           cElement.removeClass('hide');
           if($mdMedia('sm') ||  $mdMedia('xs')){
             calenderPane.style.left = (bodyRect.width-282)/2+'px';
-            calenderPane.style.top =  (bodyRect.height-342)/2+ 'px';
+            calenderPane.style.top =  (bodyRect.height-450)/2+ 'px';
           }else{
             calenderPane.style.left = (elementRect.left) + 'px';
             calenderPane.style.top = (elementRect.top) + 'px';

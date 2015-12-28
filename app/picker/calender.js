@@ -77,11 +77,11 @@ CalenderCtrl.prototype.init = function(){
 
 CalenderCtrl.prototype.buildYearCells = function(y){
 	var self = this;
-	var startYear = self.initialDate.year() -80;
+	var startYear = self.initialDate.year() -25;
 	if(!angular.isUndefined(self.minDate)){
 		startYear = self.minDate.year();		
 	}
-	var endYear = startYear +130;
+	var endYear = startYear +25;
 	if(!angular.isUndefined(self.maxDate)){
 		endYear = self.maxDate.year();		
 	}	

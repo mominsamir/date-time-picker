@@ -32,6 +32,7 @@ $disabled-date-text-color:		#ede8e8;
 			text-align: center;
 			width: $container-width;
 			height: $container-height;
+			border-radius:2px;
 			overflow: hidden;
 			md-toolbar{
 				&.md-height{
@@ -69,7 +70,6 @@ $disabled-date-text-color:		#ede8e8;
 							height: 45px;
 							padding-top: 10px;
 							.md-button{
-							  color : rgb(34, 34, 34);
 							  outline: none;
 							  cursor: pointer;
 							  font-weight: bold;
@@ -108,7 +108,7 @@ $disabled-date-text-color:		#ede8e8;
 							width: $date-cell-width;
 							height: $date-cell-height;
 							&[disabled]{
-								background-color:white;
+								background-color:transplant;
 							}
 							&:hover:not(.disabled):not(.selected){
 								background-color: $bg-date-cell-selected;

@@ -7,11 +7,53 @@
  * # MainCtrl
  * Controller of the dateTimePickerApp
  */
+
+     function MainCtrl($timeout, $mdSidenav, $mdUtil, $log,$state) {
+        var vm = this;
+
+
+        vm.logout = function(ev){
+          var confirm = $mdDialog.confirm()
+                .title('Logout')
+                .content('Save all your work before logout')
+                .ariaLabel('Logout')
+                .targetEvent(ev)
+                .ok('Logout')
+                .fullscreen(true)
+                .cancel('Cancel');
+          $mdDialog.show(confirm).then(function() {
+             Auth.logout(); 
+          }, function() {
+            
+          });          
+        };
+        
+
+        function buildToggler(navID) {
+          var debounceFn =  $mdUtil.debounce(function(){
+                $mdSidenav(navID)
+                  .toggle().then(function () {
+                    $log.debug('toggle ' + navID + ' is done');
+                  });
+              },300);
+          return debounceFn;
+        }
+        vm.toggleLeft = buildToggler('left');
+        
+    }
+
+      function LeftCtrl($timeout, $mdSidenav, $mdUtil, $log){
+        var vm = this;
+            vm.close = function () {
+            $mdSidenav('left').close()
+              .then(function () {
+              });
+          };
+      }
+
+
+
+
 angular.module('dateTimePicker')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+.controller('MainCtrl',['$timeout', '$mdSidenav', '$mdUtil', '$log','$state',MainCtrl])
+.controller('LeftCtrl', ['$timeout', '$mdSidenav', '$mdUtil', '$log',LeftCtrl]);

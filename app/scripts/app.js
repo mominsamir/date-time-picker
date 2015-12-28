@@ -35,7 +35,7 @@ angular
             controller: 'MainCtrl',
             controllerAs : 'vm',
             data: {
-                title: 'Dashboard',
+                title: 'Date Time Picker Demo',
             }            
     }).state('date-time-picker-api', {
             url: '/date-time-picker-api',  
@@ -43,9 +43,18 @@ angular
             controller: 'MainCtrl',
             controllerAs : 'vm',
             data: {
-                title: 'Dashboard',
+                title: 'Date Time Picker API',
+            }            
+    }).state('range-picker-demo', {
+            url: '/range-picker-demo',  
+            templateUrl: 'views/range-picker-demo.html',
+            controller: 'MainCtrl',
+            controllerAs : 'vm',
+            data: {
+                title: 'Range Picker Demo',
             }            
     });
+   
     $mdThemingProvider.theme('default')
-        .primaryPalette('teal');
+        .primaryPalette('red');
   });

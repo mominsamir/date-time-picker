@@ -15,7 +15,7 @@
         }];
 
         sections.push({
-          name: 'DatePicker',
+          name: 'Date Picker',
           type: 'toggle',
           iconp: 'date_range',
           pages: [{
@@ -26,6 +26,17 @@
             name: 'API',
             type: 'link',
             state: 'date-time-picker-api'
+          }]
+        });
+
+        sections.push({
+          name: 'Range Picker',
+          type: 'toggle',
+          iconp: 'date_range',
+          pages: [{
+            name: 'Demo',
+            type: 'link',
+            state: 'range-picker-demo'
           }]
         });
 

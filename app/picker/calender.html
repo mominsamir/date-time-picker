@@ -28,10 +28,10 @@
 							aria-label="privious" 
 							ng-click="vm.changePeriod('p')">
 								<md-icon md-font-icon="material-icons">keyboard_arrow_left</md-icon>					
-						</md-button>			
-						<span flex class="period-selector" ng-class="vm.moveCalenderAnimation" ng-click="vm.changeView('YEAR_MONTH')">
+						</md-button>
+						<md-button flex class="md-button" ng-class="vm.moveCalenderAnimation" ng-click="vm.changeView('YEAR_MONTH')">
 							{{vm.initialDate.format('MMM YYYY')}}
-						</span>
+						</md-button>			
 						<md-button  
 							ng-disabled="vm.stopScrollNext" 
 							class="md-icon-button scroll-button" 
@@ -97,7 +97,11 @@
 					<md-icon md-font-icon="material-icons md-primary">access_time</md-icon>
 				</md-button>
 			</div>		
-			<div layout="row" layout-align="end center" ng-show="(vm.mode==='date-time' && vm.view==='HOUR') || vm.mode!=='date-time'">
+			<div 
+				layout="row" 
+				layout-align="end center" 
+				ng-show="(vm.mode==='date-time' && vm.view==='HOUR') || vm.mode!=='date-time' "
+				ng-hide="vm.view==='YEAR_MONTH'">
 				<md-button class="md-button md-primary" ng-click="vm.closeDateTime()">Cancel</md-button>
 				<md-button class="md-button md-primary" ng-click="vm.selectedDateTime()">Ok</md-button>
 			</div>
