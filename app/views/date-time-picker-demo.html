@@ -1,5 +1,5 @@
 <md-content  class="md-whiteframe-z2" layout-padding>
-    <div  > 
+    <div  layout="column"> 
         DateTime picker, week start date is Monday    
             <date-time-picker 
                 fname="Date of Birth" 
@@ -13,7 +13,7 @@
                 week-start-day="Monday">
             </date-time-picker>
     </div>
-    <div>
+    <div   layout="column">
         Date picker, Max date set to 01-12-2016 and week start date is Sunday
             <date-time-picker 
                 fname="Date of Joining" 
@@ -29,7 +29,7 @@
             </date-time-picker>
         
     </div>
-    <div>
+    <div   layout="column">
         Min date set to 11-10-2015    
             <date-time-picker 
                 fname="Date of Pay" 
@@ -47,5 +47,20 @@
     </div>      
         <h2 class="md-headline">Docs</h2>
         <a href="/#/date-time-picker-api">Docs</a>
-    </div>     
+    </div>   
+    <div>
+        <gj-range-picker-input
+                fname="Date of Pay" 
+                lable="Date of Pay"
+                form="empForm"
+                min-date="11-10-2015" 
+                value="vm.employee.dateOfPay" 
+                flex-size="50"                         
+                is-required="{{true}}" 
+                format="MM-DD-YYYY HH:mm"
+                mode="date-time" 
+                week-start-day="Sunday">
+        </gj-range-picker-input>
+    </div>
+
 </md-content>

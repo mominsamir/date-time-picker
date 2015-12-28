@@ -12,12 +12,14 @@ function newCalender(){
 	      	format:"@",
 	      	mode:"@",
 	      	startDay:"@",
+	      	showDisplayHeader:"@",
 	      	selectedDate:"&"
 	    },
 	   	controller:["$scope","$timeout",CalenderCtrl],
 	    controllerAs : 'vm',
 	    templateUrl:"picker/calender.html",
 		link : function(scope,element,att,ctrl){
+			console.log(scope.showDisplayHeader);
 			scope.$on('$destroy',function(){
 			   element.remove();
 			});
@@ -36,6 +38,8 @@ var CalenderCtrl = function($scope,$timeout){
 	self.format = $scope.format;
 	self.restrictToMinDate = angular.isUndefined($scope.minDate) ? false : true;
 	self.restrictToMaxDate = angular.isUndefined($scope.maxDate) ? false : true;
+	console.log($scope.showDisplayHeader);
+	self.showDisplayHeader = angular.isUndefined($scope.showDisplayHeader) ? false : true;
 	self.selectedDate = $scope.selectedDate;
 	self.stopScrollPrevious =false;
 	self.stopScrollNext = false;

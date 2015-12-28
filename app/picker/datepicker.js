@@ -2,9 +2,6 @@
 
 'use strict';
 
-
-//http://www.mircozeiss.com/a-radical-new-approach-to-developing-angularjs-apps/
-
 function RangePickerInput($document){
     return {
       restrict : 'EA',
@@ -28,7 +25,7 @@ function RangePickerInput($document){
                 +'              <div ng-messages-include="modules/core/views/validation-massages.html"></div>'
                 +'          </div>            '
                 +'  </md-input-container>'
-                +'  <gj-range-picker selected-range="receiveRange(startDate,endDate,divider)" class="gj-calender-pane"  format="{{format}}" ></gj-range-picker>',
+                +'  <gj-range-picker show-display-header="false" selected-range="receiveRange(startDate,endDate,divider)" class="gj-calender-pane"  format="{{format}}" ></gj-range-picker>',
       link :  function(scope,$element,attr){
         var inputPane = $element[0].querySelector('.gj-input-container');
         var calenderPane = $element[0].querySelector('.gj-calender-pane');
@@ -81,7 +78,7 @@ function RangePickerInput($document){
 
 
 
-function DateTimePicker($mdMedia,$document){
+function DateTimePicker($mdUtil,$mdMedia,$document){
     return {
       restrict : 'EA',
       replace:true,
@@ -113,7 +110,7 @@ function DateTimePicker($mdMedia,$document){
                 +'          </div>            '
                 +'  </md-input-container>'
                 +'  <div id="picker" class="gj-calender-pane">'
-                +'      <gj-calender mode="{{mode}}" selected-date="receiveSelectedDate(date)" data-min-date="minDate" data-max-date="maxDate"  format="{{format}}"  start-day="{{weekStartDay}}" value="value"></gj-calender>'
+                +'      <gj-calender mode="{{mode}}" show-display-header="true" selected-date="receiveSelectedDate(date)" data-min-date="minDate" data-max-date="maxDate"  format="{{format}}"  start-day="{{weekStartDay}}" value="value"></gj-calender>'
                 +'  </div>'
                 +'</div>',
       link :  function(scope,$element,attr){
@@ -121,18 +118,24 @@ function DateTimePicker($mdMedia,$document){
         var calenderPane = $element[0].querySelector('.gj-calender-pane');
         var cElement = angular.element(calenderPane);
         
+        // check if Pre defined format is supplied
         scope.format = angular.isUndefined(scope.format) ? 'MM-DD-YYYY': scope.format;
         
+        // Hide calender pane on initialization
         cElement.addClass('hide');
 
+        // set start date
         scope.startDate  = angular.isUndefined(scope.value)? scope.startDate : scope.value;
 
+        // Hide Calender on click out side
         $document.on('click', function (e) {
             if ((calenderPane !== e.target && inputPane !==e.target) && (!calenderPane.contains(e.target) && !inputPane.contains(e.target))) {
               cElement.removeClass('show').addClass('hide');
+              $mdUtil.enableScrolling();      
             }
         });
 
+        // if tab out hide key board
         angular.element(inputPane).on('keydown', function (e) {
             if(e.which===9){
               cElement.removeClass('show').addClass('hide');
@@ -140,6 +143,7 @@ function DateTimePicker($mdMedia,$document){
             }
         });
 
+        // show calender 
         scope.show= function(){
           var elementRect = inputPane.querySelector('input').getBoundingClientRect();
           var bodyRect = document.body.getBoundingClientRect();
@@ -152,24 +156,27 @@ function DateTimePicker($mdMedia,$document){
             calenderPane.style.top = (elementRect.top) + 'px';
           }
           document.body.appendChild(calenderPane);
+          $mdUtil.disableScrollAround(calenderPane);
           cElement.addClass('show');
         }
 
-
+        // recieve selected Date from Calender 
         scope.receiveSelectedDate = function(d){
           if(d===null){
             cElement.removeClass('show').addClass('hide');      
             return;
           }
            scope.value =d.format(scope.format);
-          cElement.removeClass('show').addClass('hide');      
+          cElement.removeClass('show').addClass('hide');
+          $mdUtil.enableScrolling();      
         }
 
-
+        // remove element on scope destroyed
         scope.$on('$destroy',function(){
           calenderPane.parentNode.removeChild(calenderPane);
         });
 
+        
         function destroyCalender(){
           calenderPane.parentNode.removeChild(calenderPane);
       }
@@ -190,7 +197,7 @@ function smCalender (){
     },
     controller: ['$scope',RangePickerCtrl],
     controllerAs : 'vm',
-    templateUrl : 'modules/components/picker/date-range-picker.html'    
+    templateUrl : 'picker/date-range-picker.html'    
   }
 }
 
@@ -268,7 +275,8 @@ RangePickerCtrl.prototype.preDefineDate = function(p){
 
 
 var app = angular.module('dateTimePicker');
-app.directive('dateTimePicker',['$mdMedia','$document',DateTimePicker]);
-
+app.directive('dateTimePicker',['$mdUtil','$mdMedia','$document',DateTimePicker]);
+app.directive('gjRangePicker',[smCalender]);
+app.directive('gjRangePickerInput',['$document',RangePickerInput]);
 
 })();

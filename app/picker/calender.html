@@ -1,6 +1,6 @@
 <div class="gj-calender" >
 	<md-content  class="container md-whiteframe-15dp" >
-		<md-toolbar class="md-height header">	
+		<md-toolbar class="md-height header"  ng-show="vm.showDisplayHeader">	
 			<span class="md-subhead">{{vm.currentDate.format('YYYY')}}</span>
 			<div layout="row" class="sub-Head">
 				<span style="padding-right:15px;" >{{vm.currentDate.format('ddd, MMM DD')}}  </span>
