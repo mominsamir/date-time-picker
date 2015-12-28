@@ -34,8 +34,8 @@ var CalenderCtrl = function($scope,$timeout){
 	self.maxDate = $scope.maxDate;			//Maximum date 
 	self.mode = $scope.mode;				//Calender mode
 	self.format = $scope.format;
-	self.restrictToMinDate = ($scope.minDate===undefined) ? false : true;
-	self.restrictToMaxDate = ($scope.maxDate===undefined) ? false : true;
+	self.restrictToMinDate = angular.isUndefined($scope.minDate) ? false : true;
+	self.restrictToMaxDate = angular.isUndefined($scope.maxDate) ? false : true;
 	self.selectedDate = $scope.selectedDate;
 	self.stopScrollPrevious =false;
 	self.stopScrollNext = false;
@@ -59,9 +59,11 @@ CalenderCtrl.prototype.init = function(){
 	self.format = angular.isUndefined(self.format) ? 'MM-DD-YYYY': self.format;
 	self.startDay = angular.isUndefined(self.startDay) ? 'Sunday' : self.startDay ;
 	self.initialDate =	angular.isUndefined(self.initialDate)? moment() : moment(self.initialDate,self.format);
-	self.currentDate = self.initialDate.clone(); 
-	self.minDate = moment(self.minDate, self.format);
-	self.maxDate = moment(self.maxDate, self.format);
+	self.currentDate = self.initialDate.clone();
+	if(self.restrictToMinDate) 
+		self.minDate = moment(self.minDate, self.format);
+	if(self.restrictToMaxDate) 
+		self.maxDate = moment(self.maxDate, self.format);
 	self.buildYearCells();
 	self.buildDateCells();
 	self.buildDateCellHeader();
@@ -76,7 +78,13 @@ CalenderCtrl.prototype.init = function(){
 CalenderCtrl.prototype.buildYearCells = function(y){
 	var self = this;
 	var startYear = self.initialDate.year() -80;
+	if(!angular.isUndefined(self.minDate)){
+		startYear = self.minDate.year();		
+	}
 	var endYear = startYear +130;
+	if(!angular.isUndefined(self.maxDate)){
+		endYear = self.maxDate.year();		
+	}	
 	for (var i = startYear ; i <= endYear; i++) {
 		self.yearCells.push(i);
 	};	
@@ -101,7 +109,7 @@ CalenderCtrl.prototype.buildDateCells = function(){
     	Check if min date is greater than first date of month
     	if true than set stopScrollPrevious=true 
     */
-	if(self.restrictToMinDate && !angular.isUndefined(self.minDate)){	
+	if(!angular.isUndefined(self.minDate)){	
 		self.stopScrollPrevious	 = self.minDate.unix() > calStartDate.unix();
 	}
 
@@ -158,7 +166,7 @@ CalenderCtrl.prototype.buidHourCells = function(){
 	for (var i = 0 ; i <= 23; i++) {
 		var hour={
 			hour : i,
-			isCurrent :(self.initialDate.hour()-1)=== i 
+			isCurrent :(self.initialDate.hour())=== i 
 		}
 		self.hourCells.push(hour);
 	};	
@@ -169,7 +177,7 @@ CalenderCtrl.prototype.buidMinuteCells = function(){
 	for (var i = 0 ; i <= 59; i++) {
 		var minute = {
 			minute : i,
-			isCurrent : (self.initialDate.minute()-1)=== i,
+			isCurrent : (self.initialDate.minute())=== i,
 		}
 		self.minuteCells.push(minute);
 	};

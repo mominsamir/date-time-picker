@@ -49,15 +49,17 @@
 					<div layout="row" ng-repeat="w in vm.dateCells" >
 							<div 
 								layout="column" ng-repeat="d in w">
-								<span class="date-cell" 
+								<md-button
+									class="md-icon-button"
 									ng-click="vm.selectDate(d.date,d.isDisabledDate)"
-									ng-class="{'today' : d.today,
+									ng-disabled="d.isDisabledDate"
+									ng-class="{'md-primary' : d.today,
 												'active':d.isCurrentMonth,
-												'selected' :d.date.isSame(vm.currentDate),
-												'disabled':d.isDisabledDate}"
-									>
-									{{d.dayNum}}
-								</span>
+												'md-primary md-raised selected' :d.date.isSame(vm.currentDate),
+												'disabled':d.isDisabledDate}"									
+								>
+								{{d.dayNum}}
+								</md-button>
 							</div>				
 					</div>
 				</div>
@@ -92,7 +94,7 @@
 		<div class="action">
 			<div layout="row" layout-align="center center" ng-show="vm.mode==='date-time' && vm.view==='DATE'">
 				<md-button class="md-icon-button" ng-click="vm.view='HOUR'">
-					<md-icon md-font-icon="material-icons">access_time</md-icon>
+					<md-icon md-font-icon="material-icons md-primary">access_time</md-icon>
 				</md-button>
 			</div>		
 			<div layout="row" layout-align="end center" ng-show="(vm.mode==='date-time' && vm.view==='HOUR') || vm.mode!=='date-time'">

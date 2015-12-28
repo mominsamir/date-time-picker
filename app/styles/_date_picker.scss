@@ -1,8 +1,8 @@
 $container-height:              450px;
 $container-width:               296px;
-$date-cell-height:				39px;
-$date-cell-width:				39px;
-$date-cell-line-width:			39px;
+$date-cell-height:				40px;
+$date-cell-width:				40px;
+$date-cell-line-width:			40px;
 $calender-bg:					#fff;
 $bg-date-cell-selected:			#E0E0E0;
 $font-size:						13px;		
@@ -43,8 +43,8 @@ $disabled-date-text-color:		#ede8e8;
 					padding:5px;					
 				}	
 				> .sub-Head{
-					font-size: 30px;
-					line-height: 30px;
+					font-size: 25px;
+					line-height: 8px;
 					font-weight: bold;
 					text-align: left;
 					padding:5px;					
@@ -61,7 +61,7 @@ $disabled-date-text-color:		#ede8e8;
 						margin-top:20px;
 						.md-virtual-repeat-container{
 							text-align: center;
-							width: 2r40px;
+							width: 240px;
 							height: $container-height;
 						}				
 						.repeated-item {
@@ -99,6 +99,21 @@ $disabled-date-text-color:		#ede8e8;
 		 					color:rgb(155, 155, 155);
 		 					font-weight: 300;	
 		 				}
+					}
+					.md-button{
+						&.md-icon-button{
+							margin: 0;
+							padding: 0;
+							line-height: $date-cell-line-width;
+							width: $date-cell-width;
+							height: $date-cell-height;
+							&[disabled]{
+								background-color:white;
+							}
+							&:hover:not(.disabled):not(.selected){
+								background-color: $bg-date-cell-selected;
+							}					
+						}
 					}	
 					.date-cell{
 						width: $date-cell-width;
@@ -110,9 +125,6 @@ $disabled-date-text-color:		#ede8e8;
 						color: rgb(34, 34, 34);
 						&.active{
 							cursor: pointer;
-							&:hover{
-								background-color: $bg-date-cell-selected;
-							}					
 						}
 						&.disabled{
 							cursor: default;

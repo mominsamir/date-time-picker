@@ -113,7 +113,7 @@ function DateTimePicker($mdMedia,$document){
                 +'          </div>            '
                 +'  </md-input-container>'
                 +'  <div id="picker" class="gj-calender-pane">'
-                +'      <gj-calender mode="{{mode}}" selected-date="receiveSelectedDate(date)"  format="{{format}}"  week-start-day="{{weekStartDay}}" value="value"></gj-calender>'
+                +'      <gj-calender mode="{{mode}}" selected-date="receiveSelectedDate(date)" data-min-date="minDate" data-max-date="maxDate"  format="{{format}}"  start-day="{{weekStartDay}}" value="value"></gj-calender>'
                 +'  </div>'
                 +'</div>',
       link :  function(scope,$element,attr){

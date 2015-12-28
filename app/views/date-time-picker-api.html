@@ -1,9 +1,97 @@
-.state('date-time-picker', {
-            url: '/date-time-picker',  
-            templateUrl: 'views/date-time-picker-demo.html',
-            controller: 'MainCtrl',
-            controllerAs : 'vm',
-            data: {
-                title: 'Dashboard',
-            }            
-    })
+<md-content  class="md-whiteframe-z2" layout-padding>
+	<div>
+	Attributes Details
+	</div>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Attribute</th>
+					<th>Value</th>
+					<th>Desription</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>fname</td>
+					<td>Field name</td>
+					<td>Field Name</td>				
+				</tr>
+				<tr>
+					<td>lable</td>
+					<td>Lable for field</td>
+					<td>Lable for field</td>				
+				</tr>
+				<tr>
+					<td>form</td>
+					<td>form control name</td>
+					<td>form control name</td>				
+				</tr>
+				<tr>
+					<td>value</td>
+					<td>ng-Model</td>
+					<td>ng-Model value here</td>				
+				</tr>
+				<tr>
+					<td>flex-size</td>
+					<td>Flex size to setup</td>
+					<td>Flex size to setup</td>				
+				</tr>
+				<tr>
+					<td>format</td>
+					<td>date format</td>
+					<td>Moment Js accepted date format</td>				
+				</tr>
+				<tr>
+					<td>mode</td>
+					<td>Date picker or Date Time picker mode</td>
+					<td>if DateTime Mode put 'date-time' else keep blank</td>				
+				</tr>
+				<tr>
+					<td>week-start-day</td>
+					<td>Start day for calender</td>
+					<td>Monday or Sunday</td>				
+				</tr>				
+				<tr>
+					<td>start-date</td>
+					<td>Start date for calender</td>
+					<td>Keep Blank</td>				
+				</tr>				
+				<tr>
+					<td>min-date</td>
+					<td>Min Date </td>
+					<td>Min date</td>				
+				</tr>				
+				<tr>
+					<td>max-date</td>
+					<td>Max date</td>
+					<td>Max Date</td>				
+				</tr>															
+			</tbody>
+		</table>
+	</div>
+	<div>
+		Support Swipe left and right for date movement.
+	</div>
+	<div>
+		<code>
+			&lt;date-time-picker</br> 
+                fname="Date of Joining"</br> 
+                lable="joiningDate"</br>
+                form="empForm" </br>
+                value="vm.employee.joiningDate" </br>
+                start-date="10-15-2015"</br>
+                flex-size="100"</br>
+                max-date="01-12-2016"</br>                                          
+                is-required="{{true}}" </br>
+                format="MM-DD-YYYY" </br>
+                week-start-day="Sunday"&gt;</br>
+            &lt;/date-time-picker&gt;		</br>
+		</code>
+	</div>
+
+	<div>
+		Need your feedback.
+	</div>
+
+</md-content>
