@@ -148,17 +148,35 @@ function DateTimePicker($mdUtil,$mdMedia,$document){
         scope.show= function(){
           var elementRect = inputPane.querySelector('input').getBoundingClientRect();
           var bodyRect = document.body.getBoundingClientRect();
+          
           cElement.removeClass('hide');
           if($mdMedia('sm') ||  $mdMedia('xs')){
             calenderPane.style.left = (bodyRect.width-282)/2+'px';
             calenderPane.style.top =  (bodyRect.height-450)/2+ 'px';
           }else{
-            calenderPane.style.left = (elementRect.left) + 'px';
-            calenderPane.style.top = (elementRect.top) + 'px';
+            var rect = getVisibleViewPort(elementRect,bodyRect);
+            calenderPane.style.left = (rect.left) + 'px';
+            calenderPane.style.top = (rect.top) + 'px';
           }
           document.body.appendChild(calenderPane);
           $mdUtil.disableScrollAround(calenderPane);
           cElement.addClass('show');
+        }
+
+        // calculate visible port to display calender
+        function getVisibleViewPort(elementRect,bodyRect){
+          var calenderHeight = 450;
+          var calenderWidth = 296;
+
+          var top =elementRect.top;
+          if(elementRect.top +calenderHeight > bodyRect.bottom){
+            var top = elementRect.top - ((elementRect.top +calenderHeight) - (bodyRect.bottom -20));
+          }
+          var left = elementRect.left;
+          if(elementRect.left +calenderWidth > bodyRect.right){
+             left = elementRect.left - ((elementRect.left +calenderWidth) - (bodyRect.right -10));
+          }
+          return {top : top, left : left };
         }
 
         // recieve selected Date from Calender 
