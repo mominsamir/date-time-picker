@@ -16,5 +16,33 @@
     "angular-mocks": "^1.4.0"
   },
   "appPath": "app",
-  "moduleName": "dateTimePicker"
+  "moduleName": "dateTimePicker",
+  "homepage": "http://mominsamir.github.io/date-time-picker",
+  "authors": [
+    "Samir Momin <mominsamir1@gmail.com>"
+  ],
+  "description": "angular material DateTime Picker",
+  "main": "picker/calender.js,picker/datepicker.js",
+  "moduleType": [],
+  "keywords": [
+    "Angular",
+    "Date",
+    "Picker",
+    "Time",
+    "Picker",
+    "Material",
+    "Date",
+    "Picker",
+    "Material",
+    "DateTime",
+    "Picker"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }
