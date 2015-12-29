@@ -22,7 +22,9 @@
     "Samir Momin <mominsamir1@gmail.com>"
   ],
   "description": "angular material DateTime Picker",
-  "main": "picker/calender.js,picker/datepicker.js",
+  "main": ["app/picker/calender.js",
+          "app/picker/datepicker.js",
+          "app/style/main.scss"],
   "moduleType": [],
   "keywords": [
     "Angular",
