@@ -3,7 +3,7 @@
 		<md-toolbar class="md-height header"  ng-show="vm.showDisplayHeader">	
 			<span class="md-subhead">{{vm.currentDate.format('YYYY')}}</span>
 			<div layout="row" class="sub-Head">
-				<span style="padding-right:15px;" >{{vm.currentDate.format('ddd, MMM DD')}}  </span>
+				<span style="padding-right:15px;" >{{vm.currentDate.format('ddd, MMM DD')}}</span>
 				<span  ng-if="mode==='date-time'" >{{  vm.currentDate.format('HH:mm')}}</span>			
 			</div>
 		</md-toolbar>
@@ -70,7 +70,7 @@
 					<span flex="50">Minute</span>	
 				</div>
 				<md-virtual-repeat-container id="hour-container" class="hour-md-repeat" >
-					<div md-virtual-repeat="h in vm.hourCells"  class="repeated-item" flex>
+					<div md-virtual-repeat="h in vm.hourCells"  class="repeated-item" >
 						<md-button class="md-icon-button" 
 							ng-click="vm.setHour(h.hour)" 							
 							ng-class="{'md-primary': h.isCurrent,
@@ -80,7 +80,7 @@
 					</div>
 				</md-virtual-repeat-container>		     
 				<md-virtual-repeat-container id="minute-container" class="minute-md-repeat">
-					<div md-virtual-repeat="m in vm.minuteCells" class="repeated-item" flex>
+					<div md-virtual-repeat="m in vm.minuteCells" class="repeated-item" >
 						<md-button class="md-icon-button" 
 							ng-click="vm.setMinute(m.minute)" 							
 							ng-class="{'md-primary': m.isCurrent,
@@ -100,8 +100,8 @@
 			<div 
 				layout="row" 
 				layout-align="end center" 
-				ng-show="(vm.mode==='date-time' && vm.view==='HOUR') || vm.mode!=='date-time' "
-				ng-hide="vm.view==='YEAR_MONTH'">
+				ng-show="(vm.view==='HOUR') "
+				ng-hide="vm.view==='YEAR_MONTH' || vm.mode==='date-time'">
 				<md-button class="md-button md-primary" ng-click="vm.closeDateTime()">Cancel</md-button>
 				<md-button class="md-button md-primary" ng-click="vm.selectedDateTime()">Ok</md-button>
 			</div>

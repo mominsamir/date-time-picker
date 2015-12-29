@@ -87,6 +87,7 @@ function DateTimePicker($mdUtil,$mdMedia,$document){
         value: '=',
         startDate : '@',
         weekStartDay : '@',
+        startView:"@",                  
         mode : '@',
         format : '@',
         minDate : '@',
@@ -110,7 +111,7 @@ function DateTimePicker($mdUtil,$mdMedia,$document){
                 +'          </div>            '
                 +'  </md-input-container>'
                 +'  <div id="picker" class="gj-calender-pane">'
-                +'      <gj-calender mode="{{mode}}" show-display-header="true" selected-date="receiveSelectedDate(date)" data-min-date="minDate" data-max-date="maxDate"  format="{{format}}"  start-day="{{weekStartDay}}" value="value"></gj-calender>'
+                +'      <gj-calender mode="{{mode}}" start-view="{{startView}}" show-display-header="true" selected-date="receiveSelectedDate(date)" data-min-date="minDate" data-max-date="maxDate"  format="{{format}}"  start-day="{{weekStartDay}}" value="value"></gj-calender>'
                 +'  </div>'
                 +'</div>',
       link :  function(scope,$element,attr){
@@ -165,7 +166,7 @@ function DateTimePicker($mdUtil,$mdMedia,$document){
 
         // calculate visible port to display calender
         function getVisibleViewPort(elementRect,bodyRect){
-          var calenderHeight = 450;
+          var calenderHeight = 460;
           var calenderWidth = 296;
 
           var top =elementRect.top;

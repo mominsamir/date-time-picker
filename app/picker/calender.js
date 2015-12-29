@@ -2,7 +2,7 @@
 
 'use strict';
 
-function newCalender(){
+function Calender(){
 	return {
 	    restrict : 'E',
 	    scope :{
@@ -11,6 +11,7 @@ function newCalender(){
 	      	maxDate:"=",
 	      	format:"@",
 	      	mode:"@",
+	      	startView:"@",	      	
 	      	startDay:"@",
 	      	showDisplayHeader:"@",
 	      	selectedDate:"&"
@@ -19,7 +20,7 @@ function newCalender(){
 	    controllerAs : 'vm',
 	    templateUrl:"picker/calender.html",
 		link : function(scope,element,att,ctrl){
-			console.log(scope.showDisplayHeader);
+			console.log(scope.startView);
 			scope.$on('$destroy',function(){
 			   element.remove();
 			});
@@ -38,12 +39,11 @@ var CalenderCtrl = function($scope,$timeout){
 	self.format = $scope.format;
 	self.restrictToMinDate = angular.isUndefined($scope.minDate) ? false : true;
 	self.restrictToMaxDate = angular.isUndefined($scope.maxDate) ? false : true;
-	console.log($scope.showDisplayHeader);
 	self.showDisplayHeader = angular.isUndefined($scope.showDisplayHeader) ? false : true;
 	self.selectedDate = $scope.selectedDate;
 	self.stopScrollPrevious =false;
 	self.stopScrollNext = false;
-	self.view= 'DATE';
+	self.startView = $scope.startView;
 	self.yearCells = [];
 	self.monthCells=[];
 	self.dateCellHeader= [];	
@@ -74,7 +74,7 @@ CalenderCtrl.prototype.init = function(){
 	self.buildMonthCells();
 	self.buidHourCells();
 	self.buidMinuteCells();
-
+	self.view= angular.isUndefined(self.startView) || self.startView ===''? 'DATE' : self.startView;
 };
 
 
@@ -134,7 +134,6 @@ CalenderCtrl.prototype.buildDateCells = function(){
 			if(self.restrictToMaxDate && !angular.isUndefined(self.maxDate) && !isDisabledDate)
 				isDisabledDate = self.maxDate.isBefore(calStartDate);
 			
-			console.log();
 
 			var  day = {
 	            	date : calStartDate.clone(),
@@ -275,19 +274,21 @@ CalenderCtrl.prototype.setMinute = function(m){
 CalenderCtrl.prototype.selectedDateTime = function(){
 	var self = this;
 	self.selectedDate({date: self.currentDate});
-	self.view='DATE';	
+	if(!self.startView === 'HOUR')
+		self.view='DATE';	
 }
 
 CalenderCtrl.prototype.closeDateTime = function(){
 	var self = this;
 	self.selectedDate({date: null});
-	self.view='DATE';	
+	if(!self.startView === 'HOUR')
+		self.view='DATE';	
 }
 
 
 var app = angular.module('dateTimePicker');
 
-app.directive('gjCalender',['$timeout',newCalender]);
+app.directive('gjCalender',['$timeout',Calender]);
 
 
 })();

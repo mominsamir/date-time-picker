@@ -1,4 +1,4 @@
-$container-height:              450px;
+$container-height:              460px;
 $container-width:               296px;
 $date-cell-height:				40px;
 $date-cell-width:				40px;
@@ -30,7 +30,7 @@ $disabled-date-text-color:		#ede8e8;
 		.container{
 			text-align: center;
 			width: $container-width;
-			height: $container-height;
+ 			height: $container-height; 
 			border-radius:2px;
 			overflow: hidden;
 			md-toolbar{
@@ -51,7 +51,7 @@ $disabled-date-text-color:		#ede8e8;
 				}					
 			}
 			.body{
-				padding :0 6px;
+				padding :0 3px;
 				height: 325px;
 				.year-container{
 				   -webkit-animation: slideInDown 1s cubic-bezier(.06,.61,.04,1.03);
@@ -82,7 +82,7 @@ $disabled-date-text-color:		#ede8e8;
 				.date-container{
 					animation: slideInUp 1s cubic-bezier(.06,.61,.04,1.03);		
 					.navigation{
-						height: calc($date-cell-height+3);
+						height: $date-cell-height;
 						> .period-selector{
 							font-size: 14px;
 							font-weight:bold;
@@ -94,7 +94,6 @@ $disabled-date-text-color:		#ede8e8;
 					}
 					.date-cell-header{
 						cursor: default;
-						height: 39px;
 		 				& .date-cell{
 		 					color:rgb(155, 155, 155);
 		 					font-weight: 300;	
@@ -212,7 +211,7 @@ $disabled-date-text-color:		#ede8e8;
 				}			
 			}
 			.action{
-				height: 51px;
+				margin-bottom:0; 
 			}
 
 			.md-virtual-repeat-container .md-virtual-repeat-scroller{
