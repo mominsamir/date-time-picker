@@ -38,17 +38,18 @@ $disabled-date-text-color:		#ede8e8;
 					height: 74px;
 					padding-left:10px;
 				}
-				> .md-subhead{
+				.md-toolbar-tools{
 					text-align: left;
 					padding:5px;					
-				}	
-				> .sub-Head{
-					font-size: 25px;
-					line-height: 8px;
-					font-weight: bold;
-					text-align: left;
-					padding:5px;					
-				}					
+					& .selected-date{
+						font-size: 25px;
+						line-height: 8px;
+						font-weight: bold;
+						text-align: left;
+						padding-top:5px;					
+					}
+				}
+					
 			}
 			.body{
 				padding :0 3px;
@@ -107,7 +108,8 @@ $disabled-date-text-color:		#ede8e8;
 							width: $date-cell-width;
 							height: $date-cell-height;
 							&[disabled]{
-								background-color:transplant;
+								//background-color:transplant;
+								opacity: 0;
 							}
 							&:hover:not(.disabled):not(.selected){
 								background-color: $bg-date-cell-selected;

@@ -111,7 +111,7 @@ function DateTimePicker($mdUtil,$mdMedia,$document){
                 +'          </div>            '
                 +'  </md-input-container>'
                 +'  <div id="picker" class="gj-calender-pane">'
-                +'      <gj-calender mode="{{mode}}" start-view="{{startView}}" show-display-header="true" selected-date="receiveSelectedDate(date)" data-min-date="minDate" data-max-date="maxDate"  format="{{format}}"  start-day="{{weekStartDay}}" value="value"></gj-calender>'
+                +'      <gj-calender id="{{fname}}Picker" mode="{{mode}}" start-view="{{startView}}" show-display-header="true" selected-date="receiveSelectedDate(date)" data-min-date="minDate" data-max-date="maxDate"  format="{{format}}"  start-day="{{weekStartDay}}" value="value"></gj-calender>'
                 +'  </div>'
                 +'</div>',
       link :  function(scope,$element,attr){
@@ -188,7 +188,8 @@ function DateTimePicker($mdUtil,$mdMedia,$document){
             scope.value =d.format(scope.format);
             cElement.removeClass('show').addClass('hide');
           }
-          $mdUtil.enableScrolling();      
+          destroyCalender();          
+          $mdUtil.enableScrolling();
         }
 
         // remove element on scope destroyed
@@ -198,6 +199,7 @@ function DateTimePicker($mdUtil,$mdMedia,$document){
 
 
         function destroyCalender(){
+          console.log('destroyCalender');
           calenderPane.parentNode.removeChild(calenderPane);
       }
     }

@@ -20,7 +20,6 @@ function Calender(){
 	    controllerAs : 'vm',
 	    templateUrl:"picker/calender.html",
 		link : function(scope,element,att,ctrl){
-			console.log(scope.startView);
 			scope.$on('$destroy',function(){
 			   element.remove();
 			});
@@ -35,7 +34,8 @@ var CalenderCtrl = function($scope,$timeout){
 	self.startDay = $scope.startDay;	   	//if calender to be start on specific day default is sunday
 	self.minDate = $scope.minDate;			//Minimum date 
 	self.maxDate = $scope.maxDate;			//Maximum date 
-	self.mode = $scope.mode;				//Calender mode
+	self.mode = angular.isUndefined($scope.mode) ? 'DATE' : $scope.mode;
+				//Calender mode
 	self.format = $scope.format;
 	self.restrictToMinDate = angular.isUndefined($scope.minDate) ? false : true;
 	self.restrictToMaxDate = angular.isUndefined($scope.maxDate) ? false : true;
@@ -43,7 +43,6 @@ var CalenderCtrl = function($scope,$timeout){
 	self.selectedDate = $scope.selectedDate;
 	self.stopScrollPrevious =false;
 	self.stopScrollNext = false;
-	self.startView = $scope.startView;
 	self.yearCells = [];
 	self.monthCells=[];
 	self.dateCellHeader= [];	
@@ -52,14 +51,6 @@ var CalenderCtrl = function($scope,$timeout){
 	self.minuteCells =[];
 	self.monthList = moment.months();
 	self.moveCalenderAnimation='';
-	self.init();
-
-}
-
-
-
-CalenderCtrl.prototype.init = function(){
-	var self = this;
 	self.format = angular.isUndefined(self.format) ? 'MM-DD-YYYY': self.format;
 	self.startDay = angular.isUndefined(self.startDay) ? 'Sunday' : self.startDay ;
 	self.initialDate =	angular.isUndefined(self.initialDate)? moment() : moment(self.initialDate,self.format);
@@ -68,15 +59,43 @@ CalenderCtrl.prototype.init = function(){
 		self.minDate = moment(self.minDate, self.format);
 	if(self.restrictToMaxDate) 
 		self.maxDate = moment(self.maxDate, self.format);
+
+	self.init();
+	$scope.$watch('vm.topIndex', angular.bind(this, function(topIndex) {
+          var scrollYear = Math.floor(topIndex / 1);
+          self.selectedYear = scrollYear;
+    }));
+}
+
+
+
+CalenderCtrl.prototype.init = function(){
+	var self = this;
 	self.buildYearCells();
 	self.buildDateCells();
 	self.buildDateCellHeader();
 	self.buildMonthCells();
 	self.buidHourCells();
 	self.buidMinuteCells();
-	self.view= angular.isUndefined(self.startView) || self.startView ===''? 'DATE' : self.startView;
+	self.setView()
 };
 
+CalenderCtrl.prototype.setView = function(){
+	var self = this;
+	self.headerDispalyFormat = "ddd, MMM DD";	
+	switch(self.mode) {
+	    case 'date-time':
+			self.view = 'DATE'
+			self.headerDispalyFormat = "ddd, MMM DD HH:mm";			
+	        break;
+	    case 'time':
+	        self.view = 'HOUR';
+			self.headerDispalyFormat = "HH:mm";
+	        break;
+	    default:
+	        self.view = 'DATE';
+	}	
+}
 
 
 CalenderCtrl.prototype.buildYearCells = function(y){
@@ -101,8 +120,6 @@ CalenderCtrl.prototype.buildMonthCells = function(){
 
 CalenderCtrl.prototype.buildDateCells = function(){
 	var self = this;
-	
-
 	var currentMonth = self.initialDate.month();
 
     var calStartDate  = self.initialDate.clone().date(0).day(self.startDay);
@@ -159,9 +176,6 @@ CalenderCtrl.prototype.buildDateCells = function(){
 	if(self.restrictToMaxDate && !angular.isUndefined(self.maxDate)){	
 		self.stopScrollNext	= self.maxDate.unix() < calStartDate.unix();
 	}
-
-
-
 };
 
 CalenderCtrl.prototype.buidHourCells = function(){
@@ -202,7 +216,6 @@ CalenderCtrl.prototype.changePeriod = function(c){
 	self.$timeout(function(){
 		self.moveCalenderAnimation='';
 	},500);
-	
 };
 
 
@@ -274,17 +287,22 @@ CalenderCtrl.prototype.setMinute = function(m){
 CalenderCtrl.prototype.selectedDateTime = function(){
 	var self = this;
 	self.selectedDate({date: self.currentDate});
-	if(!self.startView === 'HOUR')
+	console.log(self.mode);	
+	if(self.mode === 'time') 
+		self.view='HOUR' 
+	else 
 		self.view='DATE';	
 }
 
 CalenderCtrl.prototype.closeDateTime = function(){
 	var self = this;
 	self.selectedDate({date: null});
-	if(!self.startView === 'HOUR')
-		self.view='DATE';	
+	console.log(self.mode);
+	if(self.mode === 'time') 
+		self.view='HOUR' 
+	else 
+		self.view='DATE';		
 }
-
 
 var app = angular.module('dateTimePicker');
 

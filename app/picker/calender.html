@@ -1,15 +1,19 @@
 <div class="gj-calender" >
 	<md-content  class="container md-whiteframe-15dp" >
-		<md-toolbar class="md-height header"  ng-show="vm.showDisplayHeader">	
-			<span class="md-subhead">{{vm.currentDate.format('YYYY')}}</span>
-			<div layout="row" class="sub-Head">
-				<span style="padding-right:15px;" >{{vm.currentDate.format('ddd, MMM DD')}}</span>
-				<span  ng-if="mode==='date-time'" >{{  vm.currentDate.format('HH:mm')}}</span>			
-			</div>
+		<md-toolbar class="md-height header"  ng-show="vm.showDisplayHeader">
+			<div class="md-toolbar-tools" layout="row">
+				<div layout="column" flex="100" class="">
+					<span flex ng-hide="vm.view==='HOUR'" class="md-subhead">{{vm.currentDate.format('YYYY')}}</span>
+					<span flex class="selected-date">
+							{{vm.currentDate.format(vm.headerDispalyFormat)}}			
+					</span>
+				</div>
+			</div>	
+
 		</md-toolbar>
 		<div  class="body">
 			<div ng-show="vm.view==='YEAR_MONTH'" ng-class="{'year-container' : vm.view==='YEAR_MONTH'}"> <!--  -->
-				<md-virtual-repeat-container id="year-container" class="year-md-repeat">
+				<md-virtual-repeat-container id="year-container" class="year-md-repeat" md-top-index="vm.topIndex">
 				      <div md-virtual-repeat="yr in vm.yearCells" class="repeated-item" flex>
 						<md-button class="md-button" 
 							ng-click="vm.changeYear(yr)" 							
@@ -79,7 +83,7 @@
 						</md-button>
 					</div>
 				</md-virtual-repeat-container>		     
-				<md-virtual-repeat-container id="minute-container" class="minute-md-repeat">
+				<md-virtual-repeat-container id="minute-container" class="minute-md-repeat" >
 					<div md-virtual-repeat="m in vm.minuteCells" class="repeated-item" >
 						<md-button class="md-icon-button" 
 							ng-click="vm.setMinute(m.minute)" 							
@@ -93,7 +97,7 @@
 		</div>
 		<div class="action">
 			<div layout="row" layout-align="center center" ng-show="vm.mode==='date-time' && vm.view==='DATE'">
-				<md-button class="md-icon-button" ng-click="vm.view='HOUR'">
+				<md-button class="md-icon-button" ng-click="vm.view='HOUR';vm.buidHourCells();">
 					<md-icon md-font-icon="material-icons md-primary">access_time</md-icon>
 				</md-button>
 			</div>		
