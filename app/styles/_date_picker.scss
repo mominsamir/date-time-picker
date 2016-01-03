@@ -1,8 +1,8 @@
-$container-height:              460px;
-$container-width:               296px;
-$date-cell-height:				40px;
-$date-cell-width:				40px;
-$date-cell-line-width:			40px;
+$container-height:              445px;
+$container-width:               300px;
+$date-cell-height:				30px;
+$date-cell-width:				30px;
+$date-cell-line-width:			30px;
 $calender-bg:					#fff;
 $bg-date-cell-selected:			#E0E0E0;
 $font-size:						13px;		
@@ -81,41 +81,38 @@ $disabled-date-text-color:		#ede8e8;
 					}
 				}
 				.date-container{
-					animation: slideInUp 1s cubic-bezier(.06,.61,.04,1.03);		
+					animation: slideInUp 1s cubic-bezier(.06,.61,.04,1.03);
 					.navigation{
-						height: $date-cell-height;
-						> .period-selector{
-							font-size: 14px;
-							font-weight:bold;
-							line-height: $date-cell-height;
-							color:rgb(74, 74, 74);
-							outline: none;
-							cursor:pointer;
-						}
-					}
-					.date-cell-header{
-						cursor: default;
-		 				& .date-cell{
-		 					color:rgb(155, 155, 155);
-		 					font-weight: 300;	
-		 				}
-					}
-					.md-button{
-						&.md-icon-button{
-							margin: 0;
-							padding: 0;
-							line-height: $date-cell-line-width;
-							width: $date-cell-width;
-							height: $date-cell-height;
-							&[disabled]{
-								//background-color:transplant;
-								opacity: 0;
-							}
-							&:hover:not(.disabled):not(.selected){
-								background-color: $bg-date-cell-selected;
-							}					
+						.md-button{
+							&.md-icon-button{}
 						}
 					}	
+					> .date-cell-header{
+						cursor: default;
+						> .md-button{
+							&.md-icon-button{
+								opacity: 1;
+							}
+						}
+					}
+					.date-cell-row{
+						.md-button{
+							&.md-icon-button{
+								width: $date-cell-width;
+								height: $date-cell-height;
+								line-height: 15px;
+								text-align: center;
+								&[disabled]{
+									cursor: default;
+									background-color: transparent;
+/* 									color: $disabled-date-text-color;									
+ */								}
+								&:hover:not(.disabled):not(.selected){
+									background-color: $bg-date-cell-selected;
+								}					
+							}
+						}							
+					}
 					.date-cell{
 						width: $date-cell-width;
 						height: $date-cell-height;
@@ -233,7 +230,7 @@ $disabled-date-text-color:		#ede8e8;
 }	
 
 .range-picker{
-	width: $container-width;
+	width: 310px;
 	height: 500px;	
 	background-color:$calender-bg;
 	.header{
@@ -254,18 +251,24 @@ $disabled-date-text-color:		#ede8e8;
 	.custom-select{
 		height: 390px;
 		overflow: hidden;
-		.tab-head{
-			height: 43px;
-			text-align: center;
-			line-height: 35px;
-			span{
-				color:$disabled-date-text-color;
-				width: 50%;
-				&.active{
-					color:inherit;
-					border-bottom:2px solid #FF5252;
+		&.show-calender{
+			animation: slideInRight 1s cubic-bezier(.06,.61,.04,1.03);		
+			>.tab-head{
+				height: 43px;
+				text-align: center;
+				line-height: 35px;
+				span{
+					color:$disabled-date-text-color;
+					width: 50%;
+					&.active{
+						animation: slideInRight 1s cubic-bezier(.06,.61,.04,1.03);								
+						animation-property:border-bottom;
+						color:inherit;
+						border-bottom:2px solid #FF5252;
+					}
 				}
 			}
 		}
+	
 	}	
 }

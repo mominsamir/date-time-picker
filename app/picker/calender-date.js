@@ -4,8 +4,10 @@
 
 function Calender(){
 	return {
-	    restrict : 'E',
-	    scope :{
+	  restrict : 'E',
+	  replace:true,
+      require: ['^ngModel', 'smCalender'],
+      scope :{
 	      	initialDate : "@",
 	      	minDate:"=",
 	      	maxDate:"=",
@@ -13,13 +15,16 @@ function Calender(){
 	      	mode:"@",
 	      	startView:"@",	      	
 	      	startDay:"@",
-	      	showDisplayHeader:"@",
-	      	selectedDate:"&"
+	      	showDisplayHeader:"@"
 	    },
 	   	controller:["$scope","$timeout",CalenderCtrl],
 	    controllerAs : 'vm',
-	    templateUrl:"picker/calender.html",
-		link : function(scope,element,att,ctrl){
+	    templateUrl:"picker/calender-date.html",
+		link : function(scope,element,att,ctrls){
+			var ngModelCtrl = ctrls[0];
+	        var calCtrl = ctrls[1];
+	        calCtrl.configureNgModel(ngModelCtrl);
+
 			scope.$on('$destroy',function(){
 			   element.remove();
 			});
@@ -29,18 +34,16 @@ function Calender(){
 
 var CalenderCtrl = function($scope,$timeout){
 	var self  = this;
+	self.$scope = $scope;
 	self.$timeout = $timeout;
 	self.initialDate = $scope.initialDate; 	//if calender to be  initiated with specific date 
-	self.startDay = $scope.startDay;	   	//if calender to be start on specific day default is sunday
+	self.startDay = angular.isUndefined($scope.startDay) || $scope.startDay==='' ? 'Sunday' : $scope.startDay ;	   	//if calender to be start on specific day default is sunday
 	self.minDate = $scope.minDate;			//Minimum date 
 	self.maxDate = $scope.maxDate;			//Maximum date 
 	self.mode = angular.isUndefined($scope.mode) ? 'DATE' : $scope.mode;
-				//Calender mode
 	self.format = $scope.format;
 	self.restrictToMinDate = angular.isUndefined($scope.minDate) ? false : true;
 	self.restrictToMaxDate = angular.isUndefined($scope.maxDate) ? false : true;
-	self.showDisplayHeader = angular.isUndefined($scope.showDisplayHeader) ? false : true;
-	self.selectedDate = $scope.selectedDate;
 	self.stopScrollPrevious =false;
 	self.stopScrollNext = false;
 	self.yearCells = [];
@@ -52,14 +55,12 @@ var CalenderCtrl = function($scope,$timeout){
 	self.monthList = moment.months();
 	self.moveCalenderAnimation='';
 	self.format = angular.isUndefined(self.format) ? 'MM-DD-YYYY': self.format;
-	self.startDay = angular.isUndefined(self.startDay) ? 'Sunday' : self.startDay ;
 	self.initialDate =	angular.isUndefined(self.initialDate)? moment() : moment(self.initialDate,self.format);
 	self.currentDate = self.initialDate.clone();
 	if(self.restrictToMinDate) 
 		self.minDate = moment(self.minDate, self.format);
 	if(self.restrictToMaxDate) 
 		self.maxDate = moment(self.maxDate, self.format);
-
 	self.init();
 	$scope.$watch('vm.topIndex', angular.bind(this, function(topIndex) {
           var scrollYear = Math.floor(topIndex / 1);
@@ -68,6 +69,20 @@ var CalenderCtrl = function($scope,$timeout){
 }
 
 
+ CalenderCtrl.prototype.configureNgModel = function(ngModelCtrl) {
+    this.ngModelCtrl = ngModelCtrl;
+    var self = this;
+    ngModelCtrl.$render = function() {
+      self.ngModelCtrl.$viewValue= self.currentDate;
+    };
+  };
+
+
+  CalenderCtrl.prototype.setNgModelValue = function(date) {
+  	var self = this;
+    self.ngModelCtrl.$setViewValue(date);
+    self.ngModelCtrl.$render();
+  };
 
 CalenderCtrl.prototype.init = function(){
 	var self = this;
@@ -121,7 +136,6 @@ CalenderCtrl.prototype.buildMonthCells = function(){
 CalenderCtrl.prototype.buildDateCells = function(){
 	var self = this;
 	var currentMonth = self.initialDate.month();
-
     var calStartDate  = self.initialDate.clone().date(0).day(self.startDay);
     var weekend = false;
     var isDisabledDate =false;
@@ -176,6 +190,11 @@ CalenderCtrl.prototype.buildDateCells = function(){
 	if(self.restrictToMaxDate && !angular.isUndefined(self.maxDate)){	
 		self.stopScrollNext	= self.maxDate.unix() < calStartDate.unix();
 	}
+
+	if(self.dateCells[0][6].isDisabledDate && !self.dateCells[0][6].isCurrentMonth){
+		self.dateCells[0].splice(0);
+	}
+
 };
 
 CalenderCtrl.prototype.buidHourCells = function(){
@@ -203,7 +222,6 @@ CalenderCtrl.prototype.buidMinuteCells = function(){
 CalenderCtrl.prototype.changePeriod = function(c){
 	var self = this;
 	if(c === 'p'){
-
 		if(self.stopScrollPrevious) return;
 		self.moveCalenderAnimation='slideLeft';
 		self.initialDate.subtract(1,'M');
@@ -212,6 +230,7 @@ CalenderCtrl.prototype.changePeriod = function(c){
 		self.moveCalenderAnimation='slideRight';
 		self.initialDate.add(1,'M');
 	}
+
 	self.buildDateCells();
 	self.$timeout(function(){
 		self.moveCalenderAnimation='';
@@ -223,6 +242,9 @@ CalenderCtrl.prototype.selectDate = function(d,isDisabled){
 	var self = this;
 	if (isDisabled) return;
 	self.currentDate = d;
+	self.setNgModelValue(d.format(self.format));
+	self.$scope.$emit('calender:date-selected');
+
 }
 
 
@@ -286,27 +308,171 @@ CalenderCtrl.prototype.setMinute = function(m){
 
 CalenderCtrl.prototype.selectedDateTime = function(){
 	var self = this;
-	self.selectedDate({date: self.currentDate});
-	console.log(self.mode);	
+	self.setNgModelValue(self.currentDate.format(self.format));
 	if(self.mode === 'time') 
 		self.view='HOUR' 
 	else 
-		self.view='DATE';	
+		self.view='DATE';
+	self.$scope.$emit('calender:close');			
 }
 
 CalenderCtrl.prototype.closeDateTime = function(){
 	var self = this;
-	self.selectedDate({date: null});
-	console.log(self.mode);
 	if(self.mode === 'time') 
 		self.view='HOUR' 
 	else 
-		self.view='DATE';		
+		self.view='DATE';
+	self.$scope.$emit('calender:close');
+
+}
+
+
+
+function DateTimePicker($mdUtil,$mdMedia,$document,picker){
+    return {
+      restrict : 'E',
+      replace:true,
+	  transclude: true,
+      scope :{
+        value: '=',
+        startDate : '@',
+        weekStartDay : '@',
+        startView:"@",                  
+        mode : '@',
+        format : '@',
+        minDate : '@',
+        maxDate : '@',
+        fname : "@",
+        lable : "@",
+        isRequired : '@',
+        disable : '=',
+        form : '=',
+        flexSize : '@',
+        massages : '@'
+      },
+      template: '  <md-input-container flex="{{flexSize}}"  flex="100" >'
+                +'    <label for="{{fname}}">{{lable }}</label>'
+                +'    <input name="{{fname}}" ng-model="value" '
+                +'             type="text" placeholde="{{lable}}"'
+                +'             aria-label="{{fname}}" data-ng-required="isRequired"'
+                +'             ng-focus="show()" server-error class="gj-input-container">'
+                +'    <div ng-messages="form.fname.$error" ng-if="form[fname].$touched">'
+                +'    		<div ng-messages-include="{{ngMassagedTempaltePath}}"></div>'
+                +'    </div>'
+                +'    	<div id="picker" class="gj-calender-pane">'
+                +'     		<sm-date-picker '
+                +'              id="{{fname}}Picker" '  
+                +'              ng-model="value" '
+                +'				initial-date="{{value}}"'
+                +'              mode="{{mode}}" '
+                +'              start-view="{{startView}}" '  
+                +'              data-min-date="minDate" '
+                +'              data-max-date="maxDate"  '
+                +'              format="{{format}}"  '
+                +'          	start-day="{{weekStartDay}}" > '
+                +'			</sm-date-picker>'
+                +'    	</div>'                
+                +'  </md-input-container>',
+      link :  function(scope,$element,attr){
+        var inputPane = $element[0].querySelector('.gj-input-container');
+        var calenderPane = $element[0].querySelector('.gj-calender-pane');
+        var cElement = angular.element(calenderPane);
+        scope.ngMassagedTempaltePath =picker.path;
+        console.log();
+        // check if Pre defined format is supplied
+        scope.format = angular.isUndefined(scope.format) ? 'MM-DD-YYYY': scope.format;
+        
+        // Hide calender pane on initialization
+        cElement.addClass('hide');
+
+        // set start date
+        scope.startDate  = angular.isUndefined(scope.value)? scope.startDate : scope.value;
+
+        // Hide Calender on click out side
+        $document.on('click', function (e) {
+            if ((calenderPane !== e.target && inputPane !==e.target) && (!calenderPane.contains(e.target) && !inputPane.contains(e.target))) {
+              cElement.removeClass('show').addClass('hide');
+              $mdUtil.enableScrolling();      
+            }
+        });
+
+        // if tab out hide key board
+        angular.element(inputPane).on('keydown', function (e) {
+            if(e.which===9){
+              cElement.removeClass('show').addClass('hide');
+              angular.element(inputPane).focus();
+              $mdUtil.enableScrolling();      
+            }
+        });
+
+        // show calender 
+        scope.show= function(){
+          var elementRect = inputPane.getBoundingClientRect();
+          var bodyRect = document.body.getBoundingClientRect();
+          
+          cElement.removeClass('hide');
+          if($mdMedia('sm') ||  $mdMedia('xs')){
+            calenderPane.style.left = (bodyRect.width-282)/2+'px';
+            calenderPane.style.top =  (bodyRect.height-450)/2+ 'px';
+          }else{
+            var rect = getVisibleViewPort(elementRect,bodyRect);
+            calenderPane.style.left = (rect.left) + 'px';
+            calenderPane.style.top = (rect.top) + 'px';
+          }
+          document.body.appendChild(calenderPane);
+          $mdUtil.disableScrollAround(calenderPane);
+          cElement.addClass('show');
+        }
+
+        // calculate visible port to display calender
+        function getVisibleViewPort(elementRect,bodyRect){
+          var calenderHeight = 460;
+          var calenderWidth = 296;
+
+          var top =elementRect.top;
+          if(elementRect.top +calenderHeight > bodyRect.bottom){
+            var top = elementRect.top - ((elementRect.top +calenderHeight) - (bodyRect.bottom -20));
+          }
+          var left = elementRect.left;
+          if(elementRect.left +calenderWidth > bodyRect.right){
+             left = elementRect.left - ((elementRect.left +calenderWidth) - (bodyRect.right -10));
+          }
+          return {top : top, left : left };
+        }
+
+        //listen to emit for closing calender
+        scope.$on('calender:close',function(){
+            cElement.removeClass('show').addClass('hide');
+            calenderPane.parentNode.removeChild(calenderPane);          
+            $mdUtil.enableScrolling();            
+        });
+        // remove element on scope destroyed
+        scope.$on('$destroy',function(){
+          calenderPane.parentNode.removeChild(calenderPane);
+        });
+
+    }
+  }
+} 
+
+function picker(){
+	var massagePath;
+	return{
+		setMassagePath : function(param){
+			massagePath = param
+		},  
+		$get: function(){
+			return {
+				path : massagePath
+			}
+		}
+	}
 }
 
 var app = angular.module('dateTimePicker');
 
-app.directive('gjCalender',['$timeout',Calender]);
-
+app.directive('smCalender',['$timeout',Calender]);
+app.directive('smDateTimePicker',['$mdUtil','$mdMedia','$document','picker',DateTimePicker]);
+app.provider('picker',[picker]);
 
 })();

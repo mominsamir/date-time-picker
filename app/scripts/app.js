@@ -11,13 +11,11 @@
 angular
   .module('dateTimePicker', [
     'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngSanitize',
     'ui.router',
     'ngMaterial'
   ])
-  .config(function ($stateProvider, $urlRouterProvider,$mdThemingProvider) {
+  .config(function ($stateProvider, $urlRouterProvider,$mdThemingProvider,pickerProvider) {
+
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider.state('home', {
@@ -55,5 +53,6 @@ angular
     });
    
     $mdThemingProvider.theme('default')
-        .primaryPalette('red');
+        .primaryPalette('teal');
   });
+    

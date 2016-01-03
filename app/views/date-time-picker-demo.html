@@ -1,8 +1,14 @@
+<script type="script/ng-template" id="required-message">
+  <ng-message when="required">
+    This field is required!
+  </ng-message>
+</script>
+<form name="empForm">
 <md-content  class="md-whiteframe-z2" layout-padding>
     <div  layout="column"> 
         DateTime picker, week start date is Monday    
-            <date-time-picker 
-                fname="Date of Birth" 
+            <sm-date-time-picker 
+                fname="field" 
                 lable="Date of Birth"
                 form="empForm" 
                 value="vm.employee.dateOfBirth" 
@@ -11,11 +17,11 @@
                 format="MM-DD-YYYY HH:mm"
                 mode="date-time" 
                 week-start-day="Monday">
-            </date-time-picker>
+            </sm-date-time-picker>
     </div>
     <div   layout="column">
         Date picker, Max date set to 01-12-2016 and week start date is Sunday
-            <date-time-picker 
+            <sm-date-time-picker 
                 fname="Date of Joining" 
                 lable="joiningDate"
                 form="empForm" 
@@ -26,12 +32,12 @@
                 is-required="{{true}}" 
                 format="MM-DD-YYYY" 
                 week-start-day="Sunday">
-            </date-time-picker>
+            </sm-date-time-picker>
         
     </div>
     <div   layout="column">
         Min date set to 11-10-2015    
-            <date-time-picker 
+            <sm-date-time-picker 
                 fname="Date of Pay" 
                 lable="Date of Pay"
                 form="empForm"
@@ -42,11 +48,11 @@
                 format="MM-DD-YYYY HH:mm"
                 mode="date-time" 
                 week-start-day="Sunday">
-            </date-time-picker>        
+            </sm-date-time-picker>        
     </div>   
-    <div   layout="column">
+<!--     <div   layout="column">
         View Mode Hour    
-            <date-time-picker 
+            <sm-date-time-picker 
                 fname="Date of Pay" 
                 lable="Date of Pay"
                 form="empForm"
@@ -56,11 +62,15 @@
                 mode="time"                         
                 is-required="{{true}}" 
                 format="hh:mm a">
-            </date-time-picker>        
-    </div>       
+            </sm-date-time-picker>        
+    </div>   
+    <div>
+    </div>        
     </div>      
         <h2 class="md-headline">Docs</h2>
         <a href="/#/date-time-picker-api">Docs</a>
     </div>   
+ -->
 
 </md-content>
+</form>

@@ -21,6 +21,11 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
+
+    <script type="text/ng-template" id="required.html">
+       <p ng-message="required">Required!</p>
+     </script> 
+    
       <md-content class="container" layout="row" ng-init="toogle = false" ng-controller="MainCtrl as vm">
         <md-sidenav 
           layout="column" 
@@ -111,14 +116,17 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="picker/calender.js"></script>
-        <script src="picker/datepicker.js"></script>
+        <script src=" scripts/controllers/main.js"></script>
+
         <script src="menu/menu.controller.js"></script>
         <script src="menu/menu.link.directive.js"></script>
         <script src="menu/menu.service.js"></script>
         <script src="menu/menu.toggle.directive.js"></script>        
 
+        <script src="picker/range-picker.js"></script>
+        <script src="picker/calender-date.js"></script>
+        <script src="picker/calender-hour.js"></script>
+        <script src="picker/calender-picker.js"></script>
         <!-- endbuild -->
 </body>
 </html>
