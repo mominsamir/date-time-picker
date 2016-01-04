@@ -1,4 +1,4 @@
-<div layout="column"  id="{{id}}" class="range-picker md-whiteframe-2dp animated fadeInDown" >
+<div layout="column"  id="{{id}}" class="range-picker md-whiteframe-2dp" >
     <md-toolbar layout="row"  class="md-primary" >
       	<div class="md-toolbar-tools"  layout-align="center center">
 			<div flex class="date-display"><span>{{vm.startDate}}</span></div>
@@ -18,7 +18,7 @@
 	<div layout="column" layout-sm="column" class="custom-select" flex ng-show="vm.showCustom" ng-class="{'show-calender': vm.showCustom}">
 		<div layout="row"   class="tab-head">
 			<span layout="column" class="md-ink-ripple" ng-class="{'active':vm.selectedTabIndex===0}">Start Date</span>
-			<span layout="column" class="md-ink-ripple" ng-class="{'active':vm.selectedTabIndex===1}">End Date</span>			
+			<span layout="column" class="md-ink-ripple" ng-class="{'active  slideInLeft':vm.selectedTabIndex===1}">End Date</span>			
 		</div>
 		<div ng-show="vm.selectedTabIndex===0" ng-model="vm.startDate" >
 			<sm-calender 

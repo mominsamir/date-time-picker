@@ -1,22 +1,12 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name dateTimePickerApp
- * @description
- * # dateTimePickerApp
- *
- * Main module of the application.
- */
 angular
   .module('dateTimePicker', [
     'ngAnimate',
     'ui.router',
     'ngMaterial'
   ])
-  .config(function ($stateProvider, $urlRouterProvider,$mdThemingProvider,$locationProvider,pickerProvider) {
-    
-    $locationProvider.html5Mode(true);
+  .config(function ($stateProvider, $urlRouterProvider,$mdThemingProvider,pickerProvider) {
     
     $urlRouterProvider.otherwise('/home');
 

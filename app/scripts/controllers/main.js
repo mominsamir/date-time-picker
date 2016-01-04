@@ -1,13 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name dateTimePickerApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the dateTimePickerApp
- */
-
      function MainCtrl($timeout, $mdSidenav, $mdUtil, $log,$state) {
         var vm = this;
 

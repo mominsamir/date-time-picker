@@ -26,7 +26,7 @@
           "dist/scripts/calender-hour.js",
           "dist/scripts/calender-picker.js",
           "dist/scripts/range-picker.js",                    
-          "app/style/main.scss"],
+          "dist/style/main.scss"],
   "moduleType": [],
   "keywords": [
     "Angular",
