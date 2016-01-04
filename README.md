@@ -1,9 +1,12 @@
-Date Time Picker
-=============
+# SM Date, Time and Range Picker
 
-Date and time picker based on Angular material and momentjs. 
+Picker are design to be used with Angular Material.
 
-## Demo and Docs
+  - for Demo and Docs [click me]
 
-See https://mominsamir.github.io/date-time-picker for more information.
-
+# Feature
+    - Angular Material.
+    - No Jquery Depenancy
+    - Anuglar Material Theme supported
+    - Angular Desing 
+    
