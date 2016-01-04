@@ -332,7 +332,6 @@ function DateTimePicker($mdUtil,$mdMedia,$document,picker){
     return {
       restrict : 'E',
       replace:true,
-	  transclude: true,
       scope :{
         value: '=',
         startDate : '@',
@@ -346,11 +345,9 @@ function DateTimePicker($mdUtil,$mdMedia,$document,picker){
         lable : "@",
         isRequired : '@',
         disable : '=',
-        form : '=',
-        flexSize : '@',
-        massages : '@'
+        form : '='
       },
-      template: '  <md-input-container flex="{{flexSize}}"  flex="100" >'
+      template: '  <md-input-container  >'
                 +'    <label for="{{fname}}">{{lable }}</label>'
                 +'    <input name="{{fname}}" ng-model="value" '
                 +'             type="text" placeholde="{{lable}}"'
@@ -378,7 +375,6 @@ function DateTimePicker($mdUtil,$mdMedia,$document,picker){
         var calenderPane = $element[0].querySelector('.gj-calender-pane');
         var cElement = angular.element(calenderPane);
         scope.ngMassagedTempaltePath =picker.path;
-        console.log();
         // check if Pre defined format is supplied
         scope.format = angular.isUndefined(scope.format) ? 'MM-DD-YYYY': scope.format;
         
@@ -447,9 +443,9 @@ function DateTimePicker($mdUtil,$mdMedia,$document,picker){
             $mdUtil.enableScrolling();            
         });
         // remove element on scope destroyed
-        scope.$on('$destroy',function(){
+ /*       scope.$on('$destroy',function(){
           calenderPane.parentNode.removeChild(calenderPane);
-        });
+        });*/
 
     }
   }
@@ -457,13 +453,18 @@ function DateTimePicker($mdUtil,$mdMedia,$document,picker){
 
 function picker(){
 	var massagePath;
+	var divider= " To ";
 	return{
 		setMassagePath : function(param){
 			massagePath = param
+		},
+		setDivider : function(value){
+			divider = value
 		},  
 		$get: function(){
 			return {
-				path : massagePath
+				path : massagePath,
+				divider : divider
 			}
 		}
 	}

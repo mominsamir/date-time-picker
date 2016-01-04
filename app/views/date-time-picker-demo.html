@@ -5,29 +5,37 @@
 </script>
 <form name="empForm">
 <md-content  class="md-whiteframe-z2" layout-padding>
-    <div  layout="column"> 
+    <div layout="row">
         DateTime picker, week start date is Monday    
+    </div>
+    <div  layout="row"> 
             <sm-date-time-picker 
                 fname="field" 
                 lable="Date of Birth"
                 form="empForm" 
                 value="vm.employee.dateOfBirth" 
-                flex-size="50"                         
+                flex="50"
+                flex-sm="100"
+                flex-xs="100"                          
                 is-required="{{true}}" 
                 format="MM-DD-YYYY HH:mm"
                 mode="date-time" 
                 week-start-day="Monday">
             </sm-date-time-picker>
     </div>
-    <div   layout="column">
+    <div layout="row">
         Date picker, Max date set to 01-12-2016 and week start date is Sunday
+    </div>
+    <div   layout="row">
             <sm-date-time-picker 
-                fname="Date of Joining" 
-                lable="joiningDate"
+                fname="joiningDate" 
+                lable="Date of Joining"
                 form="empForm" 
                 value="vm.employee.joiningDate" 
                 data-start-date="10-15-2015"
-                flex-size="50"
+                flex="50"
+                flex-sm="100"
+                flex-xs="100"                          
                 max-date="01-12-2016"                                          
                 is-required="{{true}}" 
                 format="MM-DD-YYYY" 
@@ -35,15 +43,17 @@
             </sm-date-time-picker>
         
     </div>
-    <div   layout="column">
+    <div layout="row">
         Min date set to 11-10-2015    
+    </div>
+    <div   layout="row">
             <sm-date-time-picker 
                 fname="Date of Pay" 
                 lable="Date of Pay"
                 form="empForm"
                 min-date="11-10-2015" 
                 value="vm.employee.dateOfPay" 
-                flex-size="50"                         
+                flex="50"                         
                 is-required="{{true}}" 
                 format="MM-DD-YYYY HH:mm"
                 mode="date-time" 

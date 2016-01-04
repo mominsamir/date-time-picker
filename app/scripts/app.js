@@ -14,8 +14,10 @@ angular
     'ui.router',
     'ngMaterial'
   ])
-  .config(function ($stateProvider, $urlRouterProvider,$mdThemingProvider,pickerProvider) {
-
+  .config(function ($stateProvider, $urlRouterProvider,$mdThemingProvider,$locationProvider,pickerProvider) {
+    
+    $locationProvider.html5Mode(true);
+    
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider.state('home', {
@@ -53,6 +55,6 @@ angular
     });
    
     $mdThemingProvider.theme('default')
-        .primaryPalette('teal');
+        .primaryPalette('blue');
   });
     

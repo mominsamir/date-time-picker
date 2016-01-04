@@ -1,8 +1,8 @@
 <div layout="column"  id="{{id}}" class="range-picker md-whiteframe-2dp animated fadeInDown" >
-    <md-toolbar layout="row"  class="header md-primary">
-      	<div class="md-toolbar-tools" >
-			<div class="date-display"><span>{{vm.startDate}}</span></div>
-			<div class="date-display"><span>{{vm.endDate}}</span></div>
+    <md-toolbar layout="row"  class="md-primary" >
+      	<div class="md-toolbar-tools"  layout-align="center center">
+			<div flex class="date-display"><span>{{vm.startDate}}</span></div>
+			<div flex class="date-display"><span>{{vm.endDate}}</span></div>
 		</div>
 	</md-toolbar>
 	<div  layout="column" flex class="pre-select"  role="button" ng-show="!vm.showCustom">
@@ -20,12 +20,12 @@
 			<span layout="column" class="md-ink-ripple" ng-class="{'active':vm.selectedTabIndex===0}">Start Date</span>
 			<span layout="column" class="md-ink-ripple" ng-class="{'active':vm.selectedTabIndex===1}">End Date</span>			
 		</div>
-		<div ng-show="vm.selectedTabIndex===0" ng-model="vm.startDate" ng-class="{'slideInRight':vm.selectedTabIndex===0}">
+		<div ng-show="vm.selectedTabIndex===0" ng-model="vm.startDate" >
 			<sm-calender 
 				week-start-day="Sunday">
 			</sm-calender>
 		</div>
-		<div ng-if="vm.selectedTabIndex===1" ng-model="vm.endDate" ng-class="{'slideInRight':vm.selectedTabIndex===1}">
+		<div ng-if="vm.selectedTabIndex===1" ng-model="vm.endDate" >
 			<sm-calender 
 				initial-date="{{vm.startDate}}"
 				min-date="vm.startDate"

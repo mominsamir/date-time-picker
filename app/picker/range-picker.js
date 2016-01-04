@@ -2,9 +2,7 @@
 
 'use strict';
 
-
-
-function RangePickerInput($document){
+function RangePickerInput($document,$mdMedia,$mdUtil){
     return {
       restrict : 'EA',
       replace: true,
@@ -16,21 +14,18 @@ function RangePickerInput($document){
         disable : '=',
         form : '=',
         format : '@',
-        divider: '@',
-        flexSize :'@'
+        divider: '@'
       },
-      template: ' <md-input-container flex="{{flexSize}}" flex-sm="100"  flex-xs="100"  >'
-                +'    <label for="{{lable}}">{{lable}}</label>'
+      template: ' <md-input-container>'
+                +'    <label for="{{fname}}">{{lable}}</label>'
                 +'      <input name="{{fname}}" ng-model="value" '
                 +'             type="text" placeholde="{{lable}}"'
                 +'             aria-label="{{fname}}" ng-required="{{isRequired}}" class="gj-input-container"'
-                +'             ng-focus="show()" server-error >'
-                +'          <div ng-messages="form[fname].$error" ng-if="form[fname].$touched">'
-                +'              <div ng-messages-include="modules/core/views/validation-massages.html"></div>'
-                +'          </div>'
+                +'             ng-focus="show()">'
                 +'    <sm-range-picker class="gj-calender-pane" ng-model="value" format="{{format}}" ></sm-range-picker>'
                 +'  </md-input-container>',
       link :  function(scope,$element,attr){
+
         var inputPane = $element[0].querySelector('.gj-input-container');
         var calenderPane = $element[0].querySelector('.gj-calender-pane');
         var cElement = angular.element(calenderPane);
@@ -44,6 +39,7 @@ function RangePickerInput($document){
         $document.on('click', function (e) {
             if ((calenderPane !== e.target && inputPane !==e.target) && (!calenderPane.contains(e.target) && !inputPane.contains(e.target))) {
               cElement.removeClass('show').addClass('hide');
+              $mdUtil.enableScrolling();                                                  
             }
         });
 
@@ -51,27 +47,52 @@ function RangePickerInput($document){
             if(e.which===9){
               cElement.removeClass('show').addClass('hide');
               angular.element(inputPane).focus();
+              $mdUtil.enableScrolling();                                                  
             }
         });
 
         scope.show= function(){
           var elementRect = inputPane.getBoundingClientRect();
           var bodyRect = document.body.getBoundingClientRect();
-          calenderPane.style.left = (elementRect.left) + 'px';
-          calenderPane.style.top = (elementRect.top) + 'px';
+
+          cElement.removeClass('hide');
+          if($mdMedia('sm') ||  $mdMedia('xs')){
+            calenderPane.style.left = (bodyRect.width-296)/2+'px';
+            calenderPane.style.top =  (bodyRect.height-450)/2+ 'px';
+          }else{
+            var rect = getVisibleViewPort(elementRect,bodyRect);
+            calenderPane.style.left = (rect.left) + 'px';
+            calenderPane.style.top = (rect.top) + 'px';
+          }
+
           document.body.appendChild(calenderPane);
-          cElement.removeClass('hide').addClass('show');
+          $mdUtil.disableScrollAround(calenderPane);
+          cElement.addClass('show');
+
         }
+
+        // calculate visible port to display calender
+        function getVisibleViewPort(elementRect,bodyRect){
+          var calenderHeight = 460;
+          var calenderWidth = 296;
+
+          var top =elementRect.top;
+          if(elementRect.top +calenderHeight > bodyRect.bottom){
+            var top = elementRect.top - ((elementRect.top +calenderHeight) - (bodyRect.bottom -20));
+          }
+          var left = elementRect.left;
+          if(elementRect.left +calenderWidth > bodyRect.right){
+             left = elementRect.left - ((elementRect.left +calenderWidth) - (bodyRect.right -10));
+          }
+          return {top : top, left : left };
+        }
+
 
         scope.$on('range-picker:close',function(){
             cElement.removeClass('show').addClass('hide');
-//            scope.value = scope.startDate +' ' + scope.divider + ' '+scope.endDate;
-            cElement.removeClass('show').addClass('hide');            
-//            $mdUtil.enableScrolling();            
+            cElement.removeClass('show').addClass('hide');
+            $mdUtil.enableScrolling();                                    
         });
-/*      
-        }
-*/
 
         scope.$on('$destroy',function(){
           calenderPane.parentNode.removeChild(calenderPane);
@@ -79,7 +100,7 @@ function RangePickerInput($document){
 
         function destroyCalender(){
           calenderPane.parentNode.removeChild(calenderPane);
-      }
+        }
     }
   }
 } 
@@ -87,7 +108,7 @@ function RangePickerInput($document){
 
 
 
-function smCalender (){
+function smRangePicker (picker){
   return{
     restrict : 'E',
     require : ['ngModel','smRangePicker'],
@@ -111,7 +132,7 @@ var RangePickerCtrl = function($scope){
   var self = this;
   self.scope = $scope;
   self.clickedButton = 0;
-  self.divider = angular.isUndefined(self.scope.divider)?'To':self.scope.divider;
+  self.divider = angular.isUndefined(self.scope.divider)?" To ":self.scope.divider;
   self.format = 'MM-DD-YYYY';
   self.showCustom=false;
   self.startDate = moment().format(self.scope.format);
@@ -199,8 +220,7 @@ RangePickerCtrl.prototype.cancel = function(){
 
 var app = angular.module('dateTimePicker');
 
-
-  app.directive('smRangePicker',[smCalender]);
-  app.directive('smRangePickerInput',['$document',RangePickerInput]);
+app.directive('smRangePicker',['picker',smRangePicker]);
+app.directive('smRangePickerInput',['$document','$mdMedia','$mdUtil',RangePickerInput]);
 
 })();
