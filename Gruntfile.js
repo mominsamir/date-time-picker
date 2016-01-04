@@ -316,16 +316,16 @@ module.exports = function (grunt) {
     //     }
     //   }
     // },
-    uglify: {
-      dist: {
-        files: {
-          '<%= yeoman.dist %>/scripts/calender-date.js': ['<%= yeoman.app %>/picker/calender-date.js'],
-          '<%= yeoman.dist %>/scripts/calender-hour.js': ['<%= yeoman.app %>/picker/calender-hour.js'],
-          '<%= yeoman.dist %>/scripts/calender-picker.js': ['<%= yeoman.app %>/picker/calender-picker.js'],
-          '<%= yeoman.dist %>/scripts/range-picker.js': ['<%= yeoman.app %>/picker/range-picker.js'],                              
-        }
-      }
-    },
+    //uglify: {
+    //  dist: {
+    //    files: {
+    //      '<%= yeoman.dist %>/scripts/calender-date.js': ['<%= yeoman.app %>/picker/calender-date.js'],
+    //      '<%= yeoman.dist %>/scripts/calender-hour.js': ['<%= yeoman.app %>/picker/calender-hour.js'],
+    //      '<%= yeoman.dist %>/scripts/calender-picker.js': ['<%= yeoman.app %>/picker/calender-picker.js'],
+    //      '<%= yeoman.dist %>/scripts/range-picker.js': ['<%= yeoman.app %>/picker/range-picker.js'],                              
+    //    }
+    //  }
+    //},
     // concat: {
     //   dist: {}
     // },
@@ -500,7 +500,7 @@ module.exports = function (grunt) {
     'cdnify',
     'cssmin',
     'uglify',
-   // 'filerev',
+    'filerev',
     'usemin',
     'htmlmin'
   ]);
