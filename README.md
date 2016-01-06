@@ -14,6 +14,19 @@ Picker are design to be used with Angular Material.
     - DateTime Picker
     
 
+### Screenshot 
+  - Date Picker
+
+![Date Picker](https://raw.githubusercontent.com/mominsamir/date-time-picker/master/app/images/date-picker-1.png "Date Picker")
+![Hour Picker](https://raw.githubusercontent.com/mominsamir/date-time-picker/master/app/images/date-picker-2.png "Date Picker")
+
+  - Range Picker
+   
+  
+![Range Default Picker](https://raw.githubusercontent.com/mominsamir/date-time-picker/master/app/images/range-picker-1.png "Range Picker")
+![Range Custome Picker](https://raw.githubusercontent.com/mominsamir/date-time-picker/master/app/images/range-picker-2.png "Range Picker")
+![Range Custome Picker](https://raw.githubusercontent.com/mominsamir/date-time-picker/master/app/images/range-picker-3.png "Range Picker")
+
 ### Installation
 ```sh
   bower install --save smDateTimeRangePicker
