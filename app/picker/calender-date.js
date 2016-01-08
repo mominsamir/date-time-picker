@@ -34,6 +34,7 @@ function Calender(){
 
 var CalenderCtrl = function($scope,$timeout){
 	var self  = this;
+
 	self.$scope = $scope;
 	self.$timeout = $timeout;
 	self.initialDate = $scope.initialDate; 	//if calender to be  initiated with specific date 
@@ -115,11 +116,11 @@ CalenderCtrl.prototype.setView = function(){
 
 CalenderCtrl.prototype.buildYearCells = function(y){
 	var self = this;
-	var startYear = self.initialDate.year() -25;
+	var startYear = self.initialDate.year() -60;
 	if(!angular.isUndefined(self.minDate)){
 		startYear = self.minDate.year();		
 	}
-	var endYear = startYear +25;
+	var endYear = self.initialDate.year() +25;
 	if(!angular.isUndefined(self.maxDate)){
 		endYear = self.maxDate.year();		
 	}	
@@ -242,7 +243,7 @@ CalenderCtrl.prototype.selectDate = function(d,isDisabled){
 	var self = this;
 	if (isDisabled) return;
 	self.currentDate = d;
-	self.setNgModelValue(d.format(self.format));
+	self.setNgModelValue(d);
 	self.$scope.$emit('calender:date-selected');
 
 }
@@ -308,7 +309,7 @@ CalenderCtrl.prototype.setMinute = function(m){
 
 CalenderCtrl.prototype.selectedDateTime = function(){
 	var self = this;
-	self.setNgModelValue(self.currentDate.format(self.format));
+	self.setNgModelValue(self.currentDate);
 	if(self.mode === 'time') 
 		self.view='HOUR' 
 	else 
@@ -349,14 +350,14 @@ function DateTimePicker($mdUtil,$mdMedia,$document,picker){
       },
       template: '  <md-input-container  >'
                 +'    <label for="{{fname}}">{{lable }}</label>'
-                +'    <input name="{{fname}}" ng-model="value" '
+                +'    <input name="{{fname}}" ng-model="value" ng-readonly="true"'
                 +'             type="text" placeholde="{{lable}}"'
                 +'             aria-label="{{fname}}" data-ng-required="isRequired"'
-                +'             ng-focus="show()" server-error class="gj-input-container">'
+                +'             ng-focus="show()" server-error class="sm-input-container">'
                 +'    <div ng-messages="form.fname.$error" ng-if="form[fname].$touched">'
                 +'    		<div ng-messages-include="{{ngMassagedTempaltePath}}"></div>'
                 +'    </div>'
-                +'    	<div id="picker" class="gj-calender-pane">'
+                +'    	<div id="picker" class="sm-calender-pane">'
                 +'     		<sm-date-picker '
                 +'              id="{{fname}}Picker" '  
                 +'              ng-model="value" '
@@ -371,8 +372,8 @@ function DateTimePicker($mdUtil,$mdMedia,$document,picker){
                 +'    	</div>'                
                 +'  </md-input-container>',
       link :  function(scope,$element,attr){
-        var inputPane = $element[0].querySelector('.gj-input-container');
-        var calenderPane = $element[0].querySelector('.gj-calender-pane');
+        var inputPane = $element[0].querySelector('.sm-input-container');
+        var calenderPane = $element[0].querySelector('.sm-calender-pane');
         var cElement = angular.element(calenderPane);
         scope.ngMassagedTempaltePath =picker.path;
         // check if Pre defined format is supplied
@@ -427,7 +428,7 @@ function DateTimePicker($mdUtil,$mdMedia,$document,picker){
 
           var top =elementRect.top;
           if(elementRect.top +calenderHeight > bodyRect.bottom){
-            var top = elementRect.top - ((elementRect.top +calenderHeight) - (bodyRect.bottom -20));
+            top = elementRect.top - ((elementRect.top +calenderHeight) - (bodyRect.bottom -20));
           }
           var left = elementRect.left;
           if(elementRect.left +calenderWidth > bodyRect.right){

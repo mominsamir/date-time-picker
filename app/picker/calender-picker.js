@@ -20,11 +20,7 @@ function DatePickerDir(){
 		link : function(scope,element,att,ngModelCtrl){
 			setViewMode(scope.mode)
 
-			scope.currentDate = isNaN(ngModelCtrl.$viewValue)  ? moment().format(scope.format): ngModelCtrl.$modelValue ;
-
-			ngModelCtrl.$viewChangeListeners.push(function() {
-				scope.currentDate = ngModelCtrl.$modelValue;
-			});
+			scope.currentDate = isNaN(ngModelCtrl.$viewValue)  ? moment(): ngModelCtrl.$viewValue ;
 
 			function setViewMode(mode){
 				switch(mode) {
@@ -50,6 +46,7 @@ function DatePickerDir(){
 					var timeSplit = scope.selectedTime.split(':');
 					date.hour(timeSplit[0]).minute(timeSplit[1]);
 				}
+				scope.currentDate =scope.selectedDate;
 				ngModelCtrl.$setViewValue(date.format(scope.format));
 				ngModelCtrl.$render();
 				setViewMode(scope.mode)
@@ -63,6 +60,7 @@ function DatePickerDir(){
 			scope.$on('$destroy',function(){
 			   element.remove();
 			});
+
 		}      
 	}
 }

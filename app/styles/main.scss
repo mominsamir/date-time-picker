@@ -95,4 +95,15 @@ table{
   }  
 }
 
-code, pre, .codelike { font-family: Consolas, Courier New, monospace; }
+code {
+    p{
+      font-family: Consolas, Courier New, monospace; 
+      font-size: 14px;
+      background-color:#b2a9a9;
+      padding:8px;
+      border-radius:5px;         
+    }
+
+
+}
+

@@ -28,7 +28,6 @@
             state: 'date-time-picker-api'
           }]
         });
-
         sections.push({
           name: 'Range Picker',
           type: 'toggle',
@@ -37,7 +36,12 @@
             name: 'Demo',
             type: 'link',
             state: 'range-picker-demo'
+          },{
+            name: 'API',
+            type: 'link',
+            state: 'range-picker-api'
           }]
+          
         });
 
 

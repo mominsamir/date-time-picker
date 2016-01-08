@@ -42,6 +42,14 @@ angular
             data: {
                 title: 'Range Picker Demo',
             }            
+    }).state('range-picker-api', {
+            url: '/range-picker-api',  
+            templateUrl: 'views/range-picker-api.html',
+            controller: 'MainCtrl',
+            controllerAs : 'vm',
+            data: {
+                title: 'Range Picker API',
+            }            
     });
    
     $mdThemingProvider.theme('default')
