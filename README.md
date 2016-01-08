@@ -2,26 +2,24 @@
 
 Picker are design to be used with Angular Material.
 
-  - for Demo [http://mominsamir.github.io/date-time-picker/]
+  * for [Demo](http://mominsamir.github.io/date-time-picker/)
+
+## Requirements
+* [AngularJS](https://angularjs.org/)
+* [Angular Material](https://material.angularjs.org/)
+* [moment.js](http://momentjs.com/)
+* [Material Design Font Icons](http://google.github.io/material-design-icons/#icon-font-for-the-web)
 
 ### Feature
-    - Angular Material based.
-    - No JQuery Dependency
-    - MomentJs
-    - Anuglar Material Theme supported
-    - Range Picker
-    - Date Picker
-    - DateTime Picker
-    
+* Anuglar Material Theme supported
 
 ### Screenshot 
-  - Date Picker
+* Date Picker
 
 ![Date Picker](https://raw.githubusercontent.com/mominsamir/date-time-picker/master/app/images/date-picker-1.png "Date Picker")
 ![Hour Picker](https://raw.githubusercontent.com/mominsamir/date-time-picker/master/app/images/date-picker-2.png "Date Picker")
 
-  - Range Picker
-   
+ * Range Picker
   
 ![Range Default Picker](https://raw.githubusercontent.com/mominsamir/date-time-picker/master/app/images/range-picker-1.png "Range Picker")
 ![Range Custome Picker](https://raw.githubusercontent.com/mominsamir/date-time-picker/master/app/images/range-picker-2.png "Range Picker")
@@ -99,4 +97,4 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
