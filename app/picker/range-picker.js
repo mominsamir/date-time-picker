@@ -22,7 +22,7 @@ function RangePickerInput($document,$mdMedia,$mdUtil){
                 +'             type="text" placeholde="{{lable}}"'
                 +'             aria-label="{{fname}}" ng-required="{{isRequired}}" class="sm-input-container"'
                 +'             ng-focus="show()">'
-                +'    <sm-range-picker class="sm-calender-pane" ng-model="value" divider="{{divider}}" format="{{format}}" ></sm-range-picker>'
+                +'    <sm-range-picker class="sm-calender-pane  md-whiteframe-15dp" ng-model="value" divider="{{divider}}" format="{{format}}" ></sm-range-picker>'
                 +'  </md-input-container>',
       link :  function(scope,$element,attr){
 

@@ -357,7 +357,7 @@ function DateTimePicker($mdUtil,$mdMedia,$document,picker){
                 +'    <div ng-messages="form.fname.$error" ng-if="form[fname].$touched">'
                 +'    		<div ng-messages-include="{{ngMassagedTempaltePath}}"></div>'
                 +'    </div>'
-                +'    	<div id="picker" class="sm-calender-pane">'
+                +'    	<div id="picker" class="sm-calender-pane md-whiteframe-15dp">'
                 +'     		<sm-date-picker '
                 +'              id="{{fname}}Picker" '  
                 +'              ng-model="value" '
@@ -406,7 +406,7 @@ function DateTimePicker($mdUtil,$mdMedia,$document,picker){
         scope.show= function(){
           var elementRect = inputPane.getBoundingClientRect();
           var bodyRect = document.body.getBoundingClientRect();
-          
+
           cElement.removeClass('hide');
           if($mdMedia('sm') ||  $mdMedia('xs')){
             calenderPane.style.left = (bodyRect.width-282)/2+'px';

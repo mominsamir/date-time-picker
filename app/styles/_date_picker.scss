@@ -14,25 +14,54 @@ $bg-date-cell-selected:			#E0E0E0;
 $font-size:						13px;		
 $today-border-color:			#106CC8;
 $disabled-date-text-color:		#ede8e8;
+$aniimation-timing-fun:			cubic-bezier(.04,1.01,.13,1.02);
+$aniimation-duration:			1s;
 
 .sm-calender-pane{
 	display:block;
 	position:fixed;
   	z-index:51;
-  	transition:all linear 1s;
-	&.show{
-	   -webkit-animation: scaleUpCal 1s cubic-bezier(.06,.61,.04,1.03);
-	   animation: scaleUpCal 1s cubic-bezier(.06,.61,.04,1.03);   
+	max-height: 0px;
+	max-width:0px;
+  	overflow: hidden;
+  	-webkit-transition: all $aniimation-duration  $aniimation-timing-fun;
+	   -moz-transition: all $aniimation-duration  $aniimation-timing-fun;
+  		 -o-transition: all $aniimation-duration  $aniimation-timing-fun;
+  		    transition: all $aniimation-duration  $aniimation-timing-fun;
+	&.hide {
+		max-height: 0px;
+		max-width: 0px;
 	}
-	&.hide{
-	   -webkit-animation: scaleDownCal 1s cubic-bezier(.06,.61,.04,1.03);
-	   animation: scaleDownCal 1s cubic-bezier(.06,.61,.04,1.03);   
+	&.show {
+	    max-height: 500px;
+	    max-width: 310px;
 	}  	
 }
+@media only screen 
+  and (min-device-width: 0px) 
+  and (max-device-width: 960px)  
+ {
+	.sm-calender-pane{
+	  	overflow: hidden;
+		&.hide {
+	  	-webkit-animation: scaleDownCal $aniimation-duration  $aniimation-timing-fun;
+		   -moz-animation: scaleDownCal $aniimation-duration  $aniimation-timing-fun;
+	  		 -o-animation: scaleDownCal $aniimation-duration  $aniimation-timing-fun;
+	  		    animation: scaleDownCal $aniimation-duration  $aniimation-timing-fun;
 
+		}
+		&.show {
+	  	-webkit-animation: scaleUpCal $aniimation-duration  $aniimation-timing-fun;
+		   -moz-animation: scaleUpCal $aniimation-duration  $aniimation-timing-fun;
+	  		 -o-animation: scaleUpCal $aniimation-duration  $aniimation-timing-fun;
+	  		    animation: scaleUpCal $aniimation-duration  $aniimation-timing-fun;
 
+		}  	
+	}
+}
 
 .picker-container{
+
 	.container{
 		width: $container-width;
  		height: $picker-container-height; 
@@ -63,6 +92,7 @@ $disabled-date-text-color:		#ede8e8;
 
 
 .date-picker{
+	
 	padding :0 3px;
 	height: 325px;
 	.year-container{
@@ -90,7 +120,7 @@ $disabled-date-text-color:		#ede8e8;
 		}
 	}
 	.date-container{
- 		animation: slideInDown 1s cubic-bezier(.06,.61,.04,1.03);				
+// 		animation: slideInDown 1s cubic-bezier(.06,.61,.04,1.03);				
 		.navigation{
 			height: 40px;
 			.md-button{

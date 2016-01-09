@@ -1,5 +1,5 @@
-<div class="picker-container">
-	<md-content  class="container md-whiteframe-15dp" >
+<div class="picker-container  md-whiteframe-15dp slider">
+	<md-content  class="container" >
 		<md-toolbar class="md-height" >
 			<div class="md-toolbar-tools">
 				<div layout="column" flex="100" class="">
@@ -9,7 +9,7 @@
 							{{currentDate.format('ddd, MMM DD')}}			
 						</span>
 						<span  class="time-display" ng-show="mode==='date-time' || view==='HOUR'">
-							{{currentDate.format('hh:mm a')}}			
+							{{currentDate.format('HH:mm')}}			
 						</span>
 					</div>					
 				</div>
