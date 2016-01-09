@@ -329,7 +329,7 @@ CalenderCtrl.prototype.closeDateTime = function(){
 
 
 
-function DateTimePicker($mdUtil,$mdMedia,$document,picker){
+function DateTimePicker($mdUtil,$mdMedia,$document,$timeout,picker){
     return {
       restrict : 'E',
       replace:true,
@@ -380,7 +380,7 @@ function DateTimePicker($mdUtil,$mdMedia,$document,picker){
         scope.format = angular.isUndefined(scope.format) ? 'MM-DD-YYYY': scope.format;
         
         // Hide calender pane on initialization
-        cElement.addClass('hide');
+        cElement.addClass('hide hide-animate');
 
         // set start date
         scope.startDate  = angular.isUndefined(scope.value)? scope.startDate : scope.value;
@@ -388,17 +388,14 @@ function DateTimePicker($mdUtil,$mdMedia,$document,picker){
         // Hide Calender on click out side
         $document.on('click', function (e) {
             if ((calenderPane !== e.target && inputPane !==e.target) && (!calenderPane.contains(e.target) && !inputPane.contains(e.target))) {
-              cElement.removeClass('show').addClass('hide');
-              $mdUtil.enableScrolling();      
+        		hideElement();
             }
         });
 
         // if tab out hide key board
         angular.element(inputPane).on('keydown', function (e) {
             if(e.which===9){
-              cElement.removeClass('show').addClass('hide');
-              angular.element(inputPane).focus();
-              $mdUtil.enableScrolling();      
+        		hideElement();
             }
         });
 
@@ -437,17 +434,17 @@ function DateTimePicker($mdUtil,$mdMedia,$document,picker){
           return {top : top, left : left };
         }
 
+        function hideElement(){
+			cElement.addClass('hide-animate');
+        	cElement.removeClass('show');
+          	 //this is only for animation
+            //calenderPane.parentNode.removeChild(calenderPane);          
+            $mdUtil.enableScrolling();
+        }
         //listen to emit for closing calender
         scope.$on('calender:close',function(){
-            cElement.removeClass('show').addClass('hide');
-            calenderPane.parentNode.removeChild(calenderPane);          
-            $mdUtil.enableScrolling();            
+        	hideElement();
         });
-        // remove element on scope destroyed
- /*       scope.$on('$destroy',function(){
-          calenderPane.parentNode.removeChild(calenderPane);
-        });*/
-
     }
   }
 } 
@@ -474,7 +471,7 @@ function picker(){
 var app = angular.module('dateTimePicker');
 
 app.directive('smCalender',['$timeout',Calender]);
-app.directive('smDateTimePicker',['$mdUtil','$mdMedia','$document','picker',DateTimePicker]);
+app.directive('smDateTimePicker',['$mdUtil','$mdMedia','$document','$timeout','picker',DateTimePicker]);
 app.provider('picker',[picker]);
 
 })();

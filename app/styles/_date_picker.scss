@@ -21,22 +21,25 @@ $aniimation-duration:			1s;
 	display:block;
 	position:fixed;
   	z-index:51;
-	max-height: 0px;
-	max-width:0px;
   	overflow: hidden;
-  	-webkit-transition: all $aniimation-duration  $aniimation-timing-fun;
+  	&.hide-animate {
+   	-webkit-transition: all $aniimation-duration  $aniimation-timing-fun;
 	   -moz-transition: all $aniimation-duration  $aniimation-timing-fun;
   		 -o-transition: all $aniimation-duration  $aniimation-timing-fun;
-  		    transition: all $aniimation-duration  $aniimation-timing-fun;
-	&.hide {
-		max-height: 0px;
-		max-width: 0px;
+  		    transition: all $aniimation-duration  $aniimation-timing-fun; 
+ 	    max-height: 0px;
+	    max-width: 0px; 
 	}
 	&.show {
-	    max-height: 500px;
-	    max-width: 310px;
+   	-webkit-transition: all $aniimation-duration  $aniimation-timing-fun;
+	   -moz-transition: all $aniimation-duration  $aniimation-timing-fun;
+  		 -o-transition: all $aniimation-duration  $aniimation-timing-fun;
+  		    transition: all $aniimation-duration  $aniimation-timing-fun; 
+ 	    max-height: 500px;
+	    max-width: 310px; 
 	}  	
 }
+
 @media only screen 
   and (min-device-width: 0px) 
   and (max-device-width: 960px)  

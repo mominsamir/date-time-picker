@@ -38,9 +38,10 @@ function DatePickerDir(){
 			}
 
 			scope.selectedDateTime = function(){
-				var date = moment(scope.selectedDate,"MM-DD-YYYY");
+				var date = moment(scope.selectedDate,scope.format);
 				if(!date.isValid()){
 					date = moment();
+					scope.selectedDate =date;
 				}
 				if(!angular.isUndefined(scope.selectedTime)){	
 					var timeSplit = scope.selectedTime.split(':');
@@ -56,10 +57,6 @@ function DatePickerDir(){
 			scope.closeDateTime = function(){
 				scope.$emit('calender:close');			
 			}
-
-			scope.$on('$destroy',function(){
-			   element.remove();
-			});
 
 		}      
 	}

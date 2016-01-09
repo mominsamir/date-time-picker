@@ -32,29 +32,26 @@ function RangePickerInput($document,$mdMedia,$mdUtil){
         
         scope.format = angular.isUndefined(scope.format) ? 'MM-DD-YYYY': scope.format;
         
-        cElement.addClass('hide');
+        cElement.addClass('hide hide-animate');
 
         scope.startDate  = angular.isUndefined(scope.value)? scope.startDate : scope.value;
 
         $document.on('click', function (e) {
             if ((calenderPane !== e.target && inputPane !==e.target) && (!calenderPane.contains(e.target) && !inputPane.contains(e.target))) {
-              cElement.removeClass('show').addClass('hide');
-              $mdUtil.enableScrolling();                                                  
+              hideElement();
             }
         });
 
         angular.element(inputPane).on('keydown', function (e) {
             if(e.which===9){
-              cElement.removeClass('show').addClass('hide');
-              angular.element(inputPane).focus();
-              $mdUtil.enableScrolling();                                                  
+              hideElement();
+              //angular.element(inputPane).focus();
             }
         });
 
         scope.show= function(){
           var elementRect = inputPane.getBoundingClientRect();
           var bodyRect = document.body.getBoundingClientRect();
-
           cElement.removeClass('hide');
           if($mdMedia('sm') ||  $mdMedia('xs')){
             calenderPane.style.left = (bodyRect.width-296)/2+'px';
@@ -88,14 +85,20 @@ function RangePickerInput($document,$mdMedia,$mdUtil){
         }
 
 
+
         scope.$on('range-picker:close',function(){
-            cElement.removeClass('show').addClass('hide');
-            $mdUtil.enableScrolling();                                    
+          hideElement();
         });
 
         scope.$on('$destroy',function(){
           calenderPane.parentNode.removeChild(calenderPane);
         });
+
+        function hideElement(){
+            cElement.addClass('hide-animate');
+            cElement.removeClass('show');          
+            $mdUtil.enableScrolling();                                    
+        }
 
         function destroyCalender(){
           calenderPane.parentNode.removeChild(calenderPane);
