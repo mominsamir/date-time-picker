@@ -50,8 +50,19 @@ angular
             data: {
                 title: 'Range Picker API',
             }            
+    }).state('timepicker', {
+            url: '/timepicker',  
+            templateUrl: 'views/timepicker.html',
+            controller: 'MainCtrl',
+            controllerAs : 'vm',
+            data: {
+                title: 'Range Picker API',
+            }            
     });
    
+
+
+
     $mdThemingProvider.theme('default')
         .primaryPalette('teal');
   });

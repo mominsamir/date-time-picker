@@ -18,6 +18,7 @@
                 flex-sm="100"
                 flex-xs="100"                          
                 is-required="{{true}}" 
+
                 format="MM-DD-YYYY HH:mm"
                 mode="date-time" 
                 week-start-day="Monday">
@@ -36,12 +37,31 @@
                 flex="50"
                 flex-sm="100"
                 flex-xs="100"                          
-                max-date="02-20-2016"                                          
+                max-date="02-20-2016"
                 is-required="{{true}}" 
                 format="MM-DD-YYYY" 
                 week-start-day="Sunday">
             </sm-date-time-picker>
     </div>
+    <div layout="row">
+        Date picker, Close on date select only works with &nbsp;<b> Date Picker </b>&nbsp; mode with attribute &nbsp;<b> close-on-select="true"
+    </div>
+    <div   layout="row">
+            <sm-date-time-picker 
+                fname="exitDate" 
+                lable="Date of Exit"
+                form="empForm" 
+                value="vm.employee.exitDate" 
+                data-start-date="10-15-2015"
+                flex="50"
+                flex-sm="100"
+                flex-xs="100"                          
+                close-on-select="true"                                                          
+                is-required="{{true}}" 
+                format="MM-DD-YYYY" 
+                week-start-day="Monday">
+            </sm-date-time-picker>
+    </div>    
     <div layout="row">
         Min date set to 11-10-2015    
     </div>
