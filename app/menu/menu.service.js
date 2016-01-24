@@ -28,10 +28,27 @@
             state: 'date-time-picker-api'
           }]
         });
+
+        sections.push({
+          name: 'Time Picker',
+          type: 'toggle',
+          iconp: 'watch_later',
+          pages: [{
+            name: 'Demo',
+            type: 'link',
+            state: 'time-picker-demo'
+          },{
+            name: 'API',
+            type: 'link',
+            state: 'time-picker-api'
+          }]
+        });
+
+
         sections.push({
           name: 'Range Picker',
           type: 'toggle',
-          iconp: 'date_range',
+          iconp: 'timeline',
           pages: [{
             name: 'Demo',
             type: 'link',
