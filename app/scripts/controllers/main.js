@@ -1,10 +1,20 @@
 'use strict';
 
-     function MainCtrl($timeout, $mdSidenav, $mdUtil, $log,$state) {
+     function MainCtrl($timeout, $mdSidenav, $mdUtil, $log,$state,$smDateTimePicker) {
         var vm = this;
+        vm.minDate = moment().subtract(1,'M').format('MM-DD-YYYY');
+        vm.maxDate = moment().add(1,'M').format('MM-DD-YYYY');
 
+        console.log(vm.minDate);
         vm.hours = [1,2,3,4,5,6,7,8,9,10,11,12];
 
+        vm.currentDate = moment();  
+
+        vm.showCalander = function(ev){
+          $smDateTimePicker(vm.currentDate, {targetEvent: ev }).then(function(selectedDate) {
+            vm.currentDate = selectedDate;
+          });          
+        }
 
         vm.logout = function(ev){
           var confirm = $mdDialog.confirm()
@@ -49,5 +59,5 @@
 
 
 angular.module('dateTimePicker')
-.controller('MainCtrl',['$timeout', '$mdSidenav', '$mdUtil', '$log','$state',MainCtrl])
+.controller('MainCtrl',['$timeout', '$mdSidenav', '$mdUtil', '$log','$state','$smDateTimePicker',MainCtrl])
 .controller('LeftCtrl', ['$timeout', '$mdSidenav', '$mdUtil', '$log',LeftCtrl]);

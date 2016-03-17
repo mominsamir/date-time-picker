@@ -16,11 +16,11 @@ function Calender($timeout,picker){
 	      	startView:"@",	      	
 	      	weekStartDay:"@"
 	    },
-	   	controller:["$scope","$timeout","picker",CalenderCtrl],
+	   	controller:["$scope","$timeout","picker","$mdMedia",CalenderCtrl],
 	    controllerAs : 'vm',
 	    templateUrl:"picker/calender-date.html",
 		link : function(scope,element,att,ctrls){
-            console.log(scope);
+
 			var ngModelCtrl = ctrls[0];
 	        var calCtrl = ctrls[1];
 	        calCtrl.configureNgModel(ngModelCtrl);
@@ -32,7 +32,7 @@ function Calender($timeout,picker){
 	}
 }
 
-var CalenderCtrl = function($scope,$timeout,picker){
+var CalenderCtrl = function($scope,$timeout,picker,$mdMedia){
 	var self  = this;
 
 	self.$scope = $scope;
@@ -41,11 +41,9 @@ var CalenderCtrl = function($scope,$timeout,picker){
     self.dayHeader = self.picker.dayHeader;
     //if calender to be  initiated with specific date       
 	self.initialDate = $scope.initialDate; 	
-
+    self.viewModeSmall = $mdMedia('xs');
     //if calender to be start on specific day default is sunday
-    console.log(self.weekStartDay );
 	self.startDay = angular.isUndefined($scope.weekStartDay) || $scope.weekStartDay==='' ? 'Sunday' : $scope.weekStartDay ;	   	
-    console.log(self.startDay );
 	self.minDate = $scope.minDate;			//Minimum date 
 	self.maxDate = $scope.maxDate;			//Maximum date 
 	self.mode = angular.isUndefined($scope.mode) ? 'DATE' : $scope.mode;
@@ -357,7 +355,6 @@ function DateTimePicker($mdUtil,$mdMedia,$document,$timeout,picker){
         scope.ngMassagedTempaltePath =picker.path;
         // check if Pre defined format is supplied
         scope.format = angular.isUndefined(scope.format) ? 'MM-DD-YYYY': scope.format;
-        console.log('===========>',scope.weekStartDay);
         
         // Hide calender pane on initialization
         cElement.addClass('hide hide-animate');

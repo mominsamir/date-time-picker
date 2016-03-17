@@ -1,17 +1,17 @@
 <div class="picker-container  md-whiteframe-15dp">
 	<md-content  layout-xs="column" layout="row"  class="container" >
-		<md-toolbar class="md-height" ng-class="{'portrait': viewModeSmall}"  layout="row" layout-xs="column">			
+		<md-toolbar class="md-height" ng-class="{'portrait': vm.viewModeSmall}"  layout="row" layout-xs="column">			
 			<div class="md-toolbar-tools" ng-show="viewModeSmall">
 				<div layout="column">
 					<div layout="row" class="md-subhead year-header" ng-hide="mode==='time'" > 
-						{{currentDate.format('YYYY')}}
+						{{vm.currentDate.format('YYYY')}}
 					</div>	
 					<div class="date-time-header">
 						<span flex class="date-display" ng-hide="mode==='time'">
-							{{currentDate.format('ddd, MMM DD')}}	 	
+							{{vm.currentDate.format('ddd, MMM DD')}}	 	
 						</span>
 						<span  class="time-display" ng-show="mode==='date-time' || mode==='time'">
-							{{currentDate.format('HH:mm')}}			
+							{{vm.currentDate.format('HH:mm')}}			
 						</span>
 					</div>					
 				</div>
@@ -19,22 +19,22 @@
 			<div ng-show="!viewModeSmall" style="width:130px;">
 				<div layout="column" >
 					<div layout="row" class="year-header" ng-hide="mode==='time'" > 
-						{{currentDate.format('YYYY')}}
+						{{vm.currentDate.format('YYYY')}}
 					</div>
 					<div layout="row" class="date-time-header" ng-hide="mode==='time'"> 
-						{{currentDate.format('ddd')}}
+						{{vm.currentDate.format('ddd')}}
 					</div>
 					<div layout="row" class="date-time-header" ng-hide="mode==='time'"> 
-						{{currentDate.format('MMM, DD')}}											
+						{{vm.currentDate.format('MMM, DD')}}											
 					</div>
 					<div layout="row" class="date-time-header" ng-show="mode==='date-time' || mode==='time'"> 
-						{{currentDate.format('HH:mm')}}			
+						{{vm.currentDate.format('HH:mm')}}			
 					</div>
 				</div>					
 			</div>				
 		</md-toolbar>
 		<div layout="column" class="picker-container" >
-			<div ng-show="view==='DATE'" >
+			<div ng-show="vm.view==='DATE'" >
 				<sm-calender 
 					ng-model="selectedDate"
 					id="{{fname}}Picker" 
@@ -52,7 +52,7 @@
 					data-format="HH:mm">
 				</sm-time>
 			</div>		
-			<div layout="row" ng-hide="closeOnSelect && (mode!=='date-time' || mode!=='time')">
+<!-- 			<div layout="row" ng-hide="closeOnSelect && (mode!=='date-time' || mode!=='time')">
 					<div ng-show="mode==='date-time'">
 						<md-button class="md-icon-button" ng-show="view==='DATE'" ng-click="view='HOUR'">
 							<md-icon md-font-icon="material-icons md-primary">access_time</md-icon>
@@ -64,7 +64,7 @@
 					<span flex></span>
 					<md-button class="md-button md-primary" ng-click="closeDateTime()">{{cancelLabel}}</md-button>
 					<md-button class="md-button md-primary" ng-click="selectedDateTime()">{{okLabel}}</md-button>
-			</div>
+			</div> -->
 		</div>
 	</md-content>	
 </div>

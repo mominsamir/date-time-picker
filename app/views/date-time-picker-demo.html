@@ -3,6 +3,9 @@
     <div layout="row">
         DateTime picker, week start date is Monday    
     </div>
+    <div layout="row">
+        DateTime picker, week start date is Monday    
+    </div>
     <div  layout="row"> 
             <sm-date-time-picker 
                 fname="field" 
@@ -13,7 +16,6 @@
                 flex-sm="100"
                 flex-xs="100"                          
                 is-required="{{true}}" 
-
                 format="MM-DD-YYYY HH:mm"
                 mode="date-time" 
                 week-start-day="Monday">
@@ -29,7 +31,6 @@
                 lable="Date of Exit"
                 form="empForm" 
                 value="vm.employee.exitDate" 
-                data-start-date="10-15-2015"
                 flex="50"
                 flex-sm="100"
                 flex-xs="100"                          
@@ -40,14 +41,14 @@
             </sm-date-time-picker>
     </div>    
     <div layout="row">
-        Min date set to 11-10-2015    
+        Min date set to {{vm.minDate}}    
     </div>
     <div   layout="row">
             <sm-date-time-picker 
                 fname="Date of Pay" 
                 lable="Date of Pay"
                 form="empForm"
-                min-date="11-10-2015" 
+                min-date="{{vm.minDate}}" 
                 value="vm.employee.dateOfPay" 
                 flex="50"                         
                 is-required="{{true}}" 
@@ -57,7 +58,7 @@
             </sm-date-time-picker>        
     </div>   
     <div layout="row">
-        Date picker, Max date set to 02-20-2016 and week start date is Sunday
+        Date picker, Max date set to {{vm.maxDate}} and week start date is Sunday
     </div>
     <div   layout="row">
             <sm-date-time-picker 
@@ -69,11 +70,16 @@
                 flex="50"
                 flex-sm="100"
                 flex-xs="100"                          
-                max-date="02-20-2016"
+                max-date="{{vm.maxDate}}"
                 is-required="{{true}}" 
                 format="MM-DD-YYYY" 
                 week-start-day="Sunday">
             </sm-date-time-picker>
     </div>    
+<!--     <div layout="row">
+    {{vm.currentDate}}
+        <md-button class="md-button md-raised " ng-click="vm.showCalander($event)">show Calander</md-button>
+    </div> -->
+
 </md-content>
 </form>
