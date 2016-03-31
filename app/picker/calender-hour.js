@@ -121,7 +121,7 @@ TimePickerCtrl.prototype.selectedDateTime = function(){
 	self.$scope.$emit('calender:close');			
 }
 
-var app = angular.module('dateTimePicker');
+var app = angular.module('smDateTimeRangePicker');
 
 app.directive('smTime',['$timeout',TimePicker]);
 

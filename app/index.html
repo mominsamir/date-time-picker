@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="dateTimePicker">
+  <body ng-app="smDateTimeRangePicker">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -26,48 +26,36 @@
        <p ng-message="required">Required!</p>
      </script> 
     
-      <md-content class="container" layout="row" ng-init="toogle = false" ng-controller="MainCtrl as vm">
+      <md-content class="container main" layout="row" ng-init="toogle = false" ng-controller="MainCtrl as vm">
         <md-sidenav 
           layout="column" 
-          class="md-sidenav-left md-whiteframe-z2" 
+          class="main-left-menu md-sidenav-left"
           md-component-id="left" 
           md-is-locked-open="$mdMedia('gt-md')">
-            <div class="profile bg-profile" >
-              <div layout="row" >
-                  <img class="profile-img" src="https://avatars0.githubusercontent.com/u/9468921?v=3&u=9b5e99c8337cdd2f5f82487e8053122d660478c8&s=140" alt="Dummy">
-              </div>
-              <div layout="row" layout-padding >
-                  <span flex></span>
-                  <span class="profile-name"  layout-align="center center">Samir Momin</span>
-                  <span flex></span>
-                  <span aria-hidden="true" ng-click="toogle = toogle ? false: true;" class="material-icons" ng-class="{'show': toogle}">keyboard_arrow_down</span>
-              </div>
-              
-              <div ng-show="toogle" layout="row" class="profile-details"  ng-class="{'detail-show': toogle}">
-                  <div flex >
-                    <span class="material-icons">info</span>
-                  </div>
-                  <div   flex>
-                    <span class="material-icons">email</span>
-                  </div>
-                  <div   flex >
-                    <span class="material-icons">star</span>
-                  </div>
-              </div>  
-            </div>
-            <md-content  role="navigation" >
-              <ul class="side-menu" ng-controller="MenuCtrl as vm" >
-                  <li ng-repeat="section in vm.menu.sections" class="parent-list-item"
-                          ng-class="{'parentActive' : vm.isSectionSelected(section)}">
-                      <h2 class="menu-heading" ng-if="section.type === 'heading'"
-                            id="heading_{{ section.name | nospace }}">
-                          {{section}}
-                      </h2>
-                      <menu-link section="section" ng-if="section.type === 'link' " ></menu-link>
-                      <menu-toggle section="section" ng-if="section.type === 'toggle' "></menu-toggle>
-                  </li>
-              </ul>
-            </md-content>            
+            <md-toolbar layout="center center" layout="row" class="left-menu-header md-whiteframe-1dp">
+                <div layout-align="center center" class="logo" layout="row">
+                    <span class="logo-image">D</span>
+                    <span class="logo-text">Date Picker</span>
+                                    {{$state.$current.data.title}}
+                </div>
+                <div layout-align="center center" layout>
+                    <md-button class="md-icon-button" ng-click="vm.toggleMenuMinimize()">
+                        <md-icon class="material-icons fold-toggle">play_circle_filled</md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>          
+            <ul class="side-menu" ng-controller="MenuCtrl as vm" >
+                <li ng-repeat="section in vm.menu.sections" class="parent-list-item"
+                    ng-class="{'parentActive' : vm.isSectionSelected(section)}">
+                    <h2 class="menu-heading" ng-if="section.type === 'heading'" id="heading_{{ section.name | nospace }}">
+                        {{section}}
+                    </h2>
+                    <menu-link section="section" ng-if="section.type === 'link' " ></menu-link>
+                    <menu-toggle section="section" ng-if="section.type === 'toggle'"></menu-toggle>
+                </li>
+            </ul>
+
+
         </md-sidenav>
         <md-content layout="column" layout-fill class="right-container">
           <md-toolbar layout="row"  class="md-whiteframe-z2 animated fadeInDown md-accent" >
@@ -108,6 +96,7 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>

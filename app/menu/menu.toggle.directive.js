@@ -1,6 +1,6 @@
 
 (function(){
-  angular.module('dateTimePicker')
+  angular.module('smDateTimeRangePicker')
     .run(['$templateCache', function($templateCache){
       $templateCache.put('partials/menu-toggle.tmpl.html',
         '<md-button class="md-button-toggle"\n' +

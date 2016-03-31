@@ -383,7 +383,8 @@ function DateTimePicker($mdUtil,$mdMedia,$document,$timeout,picker){
 
           cElement.removeClass('hide');
           if($mdMedia('sm') ||  $mdMedia('xs')){
-            calenderPane.style.left = (bodyRect.width-282)/2+'px';
+            console.log(bodyRect.width);
+            calenderPane.style.left = (bodyRect.width-300)/2+'px';
             calenderPane.style.top =  (bodyRect.height-450)/2+ 'px';
           }else{
             var rect = getVisibleViewPort(elementRect,bodyRect);
@@ -506,7 +507,8 @@ function smTimePickerNew($mdUtil,$mdMedia,$document,$timeout,picker){
 
           cElement.removeClass('hide');
           if($mdMedia('sm') ||  $mdMedia('xs')){
-            calenderPane.style.left = (bodyRect.width-282)/2+'px';
+            console.log(bodyRect.width);
+            calenderPane.style.left = (bodyRect.width-300)/2+'px';
             calenderPane.style.top =  (bodyRect.height-450)/2+ 'px';
           }else{
             var rect = getVisibleViewPort(elementRect,bodyRect);
@@ -631,7 +633,7 @@ function picker(){
 	}
 }
 
-var app = angular.module('dateTimePicker');
+var app = angular.module('smDateTimeRangePicker');
 
 app.directive('smCalender',['$timeout','picker',Calender]);
 app.directive('smDateTimePicker',['$mdUtil','$mdMedia','$document','$timeout','picker',DateTimePicker]);

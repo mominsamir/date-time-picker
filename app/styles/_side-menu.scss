@@ -1,185 +1,306 @@
-/* menu css  */
-$background-color:#106CC8;
-$font-color: rgba(255,255,255,1);
-$font-icon-color: rgba(255,255,255,0.7);
-$profile-height:200px;
-$border-top-color:#267ED5;
+$font-list: (
+    '\'Roboto\', sans-serif',
+    '\'Montserrat\', sans-serif',
+    '\'Open Sans\', sans-serif'
+);
+
+$directions: (left,right,top,bottom);
+
+@function my-get-font($index) {
+    @return unquote(nth($font-list, $index));
+}
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+    @-moz-keyframes #{$animation-name} {
+        @content;
+    }  
+    @-ms-keyframes #{$animation-name} {
+        @content;
+    }
+    @-o-keyframes #{$animation-name} {
+        @content;
+    }  
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};      
+}
+
+// generic transform
+@mixin transform($transforms) {
+       -moz-transform: $transforms;
+         -o-transform: $transforms;
+        -ms-transform: $transforms;
+    -webkit-transform: $transforms;
+          transform: $transforms;
+}
+// rotate
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+ 
+// scale
+@mixin scale($scale) {
+     @include transform(scale($scale));
+} 
+// translate
+@mixin translate ($x, $y) {
+   @include transform(translate($x, $y));
+}
+// skew
+@mixin skew ($x, $y) {
+   @include transform(skew(#{$x}deg, #{$y}deg));
+}
+//transform origin
+@mixin transform-origin ($origin) {
+    moz-transform-origin: $origin;
+         -o-transform-origin: $origin;
+        -ms-transform-origin: $origin;
+    -webkit-transform-origin: $origin;
+          transform-origin: $origin;
+}
+
+@for $var from 0 through 12  {
+    $i: $var * 4;
+    .margin-#{$i} {
+        margin: #{$i}px;
+    }
+    .padding-#{$i} {
+        padding: #{$i}px;
+    }
+    .material-icons.md-#{$i} {
+            font-size: #{$i}px;
+    }
+    @each $d in $directions {
+        .margin-#{$d}-#{$i} {
+            margin-#{$d}: #{$i}px;
+        }
+        .padding-#{$d}-#{$i} {
+            padding-#{$d}: #{$i}px;
+        }
+    }
+}
+
+@each $d in $directions {
+    .align-#{$d} {
+        text-align: #{$d};
+    }
+}
+
+
+$menu-bg-color: #2d323e;
+$active-menu-color: #282c37;
+$menu-font-color: rgba(255,255,255, 0.7);
+$menu-height: 48px;
+$menu-width: 256px;
+$menu-minimized-width: 52px;
+$menu-minimized-submenu-width: 176px;
+$animation: all ease-in-out 0.5s;
 
 md-sidenav {
-  background-color:$background-color;
-}
-
-.bg-profile {
-    height: $profile-height;
-    background-color: $background-color;
-    background: linear-gradient(#185694, $background-color);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #185694), color-stop(1, $background-color));
-    background: -webkit-linear-gradient(top, #185694 0%, $background-color 100%);
-    background: -moz-linear-gradient(top, #185694 0%, $background-color 100%);
-    background: linear-gradient(top, #185694 0%, $background-color 100%);
-    border-bottom: 1px solid $border-top-color;
+    width: $menu-width;
+    @include transition($animation);
     flex-shrink: 0;
-    z-index: 2;
- }
+    z-index: 999;
+    min-height: 100vh;
 
+    &.menu-minimized {
+        width: $menu-minimized-width;
 
-.profile{
-    color: $font-color;
-    & .profile-img{
-    border-radius: 50%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    border: 2px solid rgba(6,55,102,.5);
-    margin-top: 15px;
-    width: auto;
-    transform-origin: 50% 0;
-    transform: scale(1.1); 
-   }
-   & .profile-name{
-      font-size: 24px;
-      text-align: center;
-      padding : 5px;
-   }
-   & .material-icons{
-      outline: none;
-      cursor: pointer;      
-      -webkit-transition: -webkit-transform .3s ease-in-out;
-      transition: transform .3s ease-in-out;    
-   }
-   & .show{
-      font-size: 24px;
-      transform: rotateZ(180deg);
-      -webkit-transform: rotateZ(180deg);        
+        &.main-left-menu {
+            overflow: visible;
+
+            .left-menu-header {
+                .logo {
+                    opacity: 0;
+                    width: 0;
+                }
+                .fold-toggle {
+                    @include rotate(0);
+                }
+            }
+
+            .side-menu {
+                > li {
+                    position: relative;
+                    > menu-link > a,
+                    > menu-toggle > a {
+                        > .menu-text-container {
+                            width: 0;
+                            opacity: 0;
+                        }
+
+                    }
+                }
+
+                li {
+                    .menu-toggle-list {
+                        position: absolute;
+                        top: 0;
+                        left: $menu-minimized-width;
+                        width: $menu-minimized-submenu-width;
+                        padding: 0;
+
+                        .menu-text-container {
+                            opacity: 1;
+                            width: initial;
+                        }
+                    }
+                }
+            }
+        }
     }
-   & .profile-details{
-      text-align: center;
-      transition: height 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94)      
+    &.main-left-menu {
+        color: $menu-font-color;
+        max-width: $menu-width;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: $menu-bg-color;
+        @include transition($animation);
+
+        .side-menu {
+            margin: 0;
+            padding: 0;
+            margin-top: 16px;
+            @include transition($animation);
+
+            li {
+                display: block;
+                margin: 0;
+
+                &.parentActive {
+                    background-color: $active-menu-color;
+                }
+
+                .menu-toggle-list {
+                    max-height: 400px;
+                    opacity: 1;
+                    @include transition($animation);
+                    background-color: $active-menu-color;
+
+                    &.ng-hide {
+                        max-height: 0px;
+                        opacity: 0;
+                    }
+
+                    li {
+                        a {
+                            font-size: 13px;
+                        }
+                    }
+                }
+
+                a {
+                    margin: 0;
+                    display: flex;
+                    flex-direction: row wrap;
+                    height: $menu-height;
+                    line-height: $menu-height;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    color: $menu-font-color;
+                    font-family: my-get-font(3);
+                    font-size: 14px;
+
+                    md-icon {
+                        color: rgba(255,255,255, 0.7);
+                        font-size: 18px;
+                        flex: 0 1 40px;
+                        &.menu-toggle-icon {
+                            float: right;
+                            margin-top: 12px;
+                            @include transition($animation);
+                            &.toggled {
+                                @include rotate(90);
+                                margin-right: 7px;
+                            }
+                        }
+                    }
+
+                    .menu-text-container {
+                        flex: 1 1;
+                        opacity: 1;
+                        @include transition($animation);
+                    }
+                }
+            }
+        }
+
+        .left-menu-header {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: $menu-font-color;
+            max-height: $menu-height;
+            max-width: 100%;
+
+            .logo {
+                width: 75%;
+                @include transition($animation);
+                opacity: 1;
+
+                .logo-image {
+                    display: block;
+                    background: material-color("blue", "500");
+                    width: 32px;
+                    height: 32px;
+                    line-height: 32px;
+                    text-align: center;
+                    border-radius: 2px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: $menu-font-color;
+                }
+                .logo-text {
+                    margin-left: 16px;
+                    font-size: 20px;
+                    font-family: my-get-font(2);
+                    color: $menu-font-color;
+                }
+            }
+            .fold-toggle {
+                @include rotate(180);
+            }
+        }
     }
-   & .detail-show{
-      height: 100%;
-      overflow: hidden;
-      position: relative;      
-      transition: height 1s cubic-bezier(0.17, 0.04, 0.03, 0.94)
-   } 
-   &.profile-email{
-        color: $font-color;
-        text-align: center;
-        font-size: 13px;
-        padding : 2px 5px 0px 5px;
+
+}
+@media screen and (min-width: 0px)  and (max-width: 1280px) {
+    //hide toogle button on sidenav toolbar
+   md-sidenav {
+        &.main-left-menu{
+            .left-menu-header {
+                .fold-toggle {
+                    display:none !important;
+                }
+            }
+        }
     }
 }
 
-.side-menu, .side-menu ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 0;
-  font-size: 16px;
+.menu-minimized-backdrop {
+    z-index: 995;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
 }
 
-$menu-height : 48px;
-
-.side-menu .md-button {
-  background-color:$background-color;
-  border-radius: 0;
-  color: $font-color;
-  cursor: pointer;
-  font-size: 16px; 
-  line-height: $menu-height;
-  margin: 0;
-  max-height: $menu-height;
-  overflow: hidden;
-  padding-left: 0px;
-  text-align: left;
-  text-decoration: none;
-  white-space: normal;
-  width: 100%;
-  md-icon{
-    padding: 0px 16px;
-    color:$font-icon-color;
-  }
-
-}
-
-
-
-.side-menu .menu-toggle-list a.md-button {
-  display: block;
-  font-weight:bold;
-  padding: 0 16px 0 32px;
-  text-transform: none;
-  text-rendering: optimizeLegibility;
-  font-weight: 500;
-  height: 48px;
-}
-
-.side-menu .menu-toggle-list .md-button {
-  display: block;
-  padding: 0 16px 0 60px;
-  text-transform: none;
-}
-.side-menu > li {
-  border-top: 1px solid $border-top-color;/* rgba(0, 0, 0, 0.12) */;
-
-} 
-.md-button-toggle .md-toggle-icon.toggled {
-  transform: rotateZ(180deg);
-  -webkit-transform: rotateZ(180deg);
-}
-
-.side-menu .md-button-toggle .md-toggle-icon {
-  background-size: 100% auto;
-  float:right;
-  display: inline-block;
-  margin: auto 0 auto 0;
-  color: $font-icon-color;
-  -webkit-transition: -webkit-transform .3s ease-in-out;
-  transition: transform .3s ease-in-out;
-}
-
-.menu-toggle-list.ng-hide {
-  max-height: 0;
-}
-
-
-.side-menu .md-button:hover {
-  background-color:#267ED5;
-}
-
-.menu-toggle-list {
-  background: $background-color;
-  max-height: 100vh;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-  -webkit-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
-  -webkit-transition-property: max-height;
-  -moz-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
-  -moz-transition-property: max-height;
-  transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
-  transition-property: max-height;
-}
-
-
-.side-menu menu-toggle span{
-   padding-top: 12px; 
-  padding-bottom: 12px; 
-}
-
-.toogle {
-  -webkit-transition:all linear 0.5s;
-  transition:all linear 0.5s;
-}
-.toogle.ng-hide {
-  opacity:0;
-}
-
-.header-cover {
-  background-repeat: no-repeat;
-  background-position: center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
 

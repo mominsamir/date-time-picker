@@ -9,9 +9,19 @@
         vm.hours = [1,2,3,4,5,6,7,8,9,10,11,12];
 
         vm.currentDate = moment();  
+        var o = {
+          mode : 'date-time',
+          view : 'DATE',
+          format : 'MM-DD-YYYY',
+          minDate : '03-10-2016',
+          maxDate : null,    
+          weekStartDay :'Sunday',
+          closeOnSelect : false
+        }
 
         vm.showCalander = function(ev){
-          $smDateTimePicker(vm.currentDate, {targetEvent: ev }).then(function(selectedDate) {
+          o.targetEvent = ev;
+          $smDateTimePicker(vm.currentDate,o).then(function(selectedDate) {
             vm.currentDate = selectedDate;
           });          
         }
@@ -58,6 +68,6 @@
 
 
 
-angular.module('dateTimePicker')
+angular.module('smDateTimeRangePicker')
 .controller('MainCtrl',['$timeout', '$mdSidenav', '$mdUtil', '$log','$state','$smDateTimePicker',MainCtrl])
 .controller('LeftCtrl', ['$timeout', '$mdSidenav', '$mdUtil', '$log',LeftCtrl]);

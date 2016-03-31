@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-  .module('dateTimePicker', [
+  .module('smDateTimeRangePicker', [
     'ngAnimate',
     'ui.router',
     'ngMaterial'
@@ -84,6 +84,6 @@ angular
 
 
     $mdThemingProvider.theme('default')
-        .primaryPalette('teal');
+        .primaryPalette('red').accentPalette('green');
   });
     

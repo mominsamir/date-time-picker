@@ -1,4 +1,4 @@
-<div class="picker-container  md-whiteframe-15dp">
+<md-dialog class="picker-container  md-whiteframe-15dp" aria-label="picker">
 	<md-content  layout-xs="column" layout="row"  class="container" >
 		<md-toolbar class="md-height" ng-class="{'portrait': vm.viewModeSmall}"  layout="row" layout-xs="column">			
 			<div class="md-toolbar-tools" ng-show="viewModeSmall">
@@ -36,35 +36,35 @@
 		<div layout="column" class="picker-container" >
 			<div ng-show="vm.view==='DATE'" >
 				<sm-calender 
-					ng-model="selectedDate"
-					id="{{fname}}Picker" 
-					data-mode="{{mode}}" 
-					data-min-date="minDate" 
-					data-max-date="maxDate" 
-					close-on-select="{{closeOnSelect}}"				 
-					data-format="{{format}}"  
-					data-week-start-day="{{weekStartDay}}">
+					ng-model="vm.selectedDate"
+					id="{{vm.fname}}Picker" 
+					data-mode="{{vm.mode}}" 
+					data-min-date="vm.minDate" 
+					data-max-date="vm.maxDate" 
+					close-on-select="{{vm.closeOnSelect}}"				 
+					data-format="{{vm.format}}"  
+					data-week-start-day="{{vm.weekStartDay}}">
 				</sm-calender>
 			</div>
-			<div ng-show="view==='HOUR'">
+			<div ng-show="vm.view==='HOUR'">
 				<sm-time
-					ng-model="selectedTime"
+					ng-model="vm.selectedTime"
 					data-format="HH:mm">
 				</sm-time>
 			</div>		
-<!-- 			<div layout="row" ng-hide="closeOnSelect && (mode!=='date-time' || mode!=='time')">
-					<div ng-show="mode==='date-time'">
-						<md-button class="md-icon-button" ng-show="view==='DATE'" ng-click="view='HOUR'">
+ 			<div layout="row" ng-hide="vm.closeOnSelect && (vm.mode!=='date-time' || vm.mode!=='time')">
+					<div ng-show="vm.mode==='date-time'">
+						<md-button class="md-icon-button" ng-show="vm.view==='DATE'" ng-click="vm.view='HOUR'">
 							<md-icon md-font-icon="material-icons md-primary">access_time</md-icon>
 						</md-button>				
-						<md-button class="md-icon-button" ng-show="view==='HOUR'" ng-click="view='DATE'">
+						<md-button class="md-icon-button" ng-show="vm.view==='HOUR'" ng-click="vm.view='DATE'">
 							<md-icon md-font-icon="material-icons md-primary">date_range</md-icon>
 						</md-button>
 					</div>												
 					<span flex></span>
-					<md-button class="md-button md-primary" ng-click="closeDateTime()">{{cancelLabel}}</md-button>
-					<md-button class="md-button md-primary" ng-click="selectedDateTime()">{{okLabel}}</md-button>
-			</div> -->
+					<md-button class="md-button md-primary" ng-click="vm.closeDateTime()">Cancel</md-button>
+					<md-button class="md-button md-primary" ng-click="vm.selectedDateTime()">Ok</md-button>
+			</div>
 		</div>
 	</md-content>	
-</div>
+</md-dialog>

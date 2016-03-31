@@ -56,7 +56,7 @@
 
       }
 
-  angular.module('dateTimePicker')
+  angular.module('smDateTimeRangePicker')
     .controller('MenuCtrl', ['$log','$state','$timeout','$location','$mdSidenav','menu', MenuCtrl]);
 
 })();

@@ -1,5 +1,5 @@
 {
-  "name": "date-time-picker",
+  "name": "smDateTimeRangePicker",
   "version": "0.0.1",
   "dependencies": {
     "angular": "^1.3.0",
@@ -8,7 +8,7 @@
     "angular-resource": "^1.4.0",
     "angular-sanitize": "^1.4.0",
     "angular-touch": "^1.4.0",
-    "angular-material": "1.0.0",
+    "angular-material": "1.0.6",
     "moment": "~2.10.6",
     "angular-ui-router": "~0.2.15"
   },
@@ -22,11 +22,13 @@
     "Samir Momin <mominsamir1@gmail.com>"
   ],
   "description": "angular material DateTime Picker",
-  "main": ["dist/scripts/calender-date.js",
-          "dist/scripts/calender-hour.js",
-          "dist/scripts/calender-picker.js",
-          "dist/scripts/range-picker.js",                    
-          "dist/style/main.scss"],
+  "main": [
+    "dist/scripts/calender-date.js",
+    "dist/scripts/calender-hour.js",
+    "dist/scripts/calender-picker.js",
+    "dist/scripts/range-picker.js",
+    "dist/style/main.scss"
+  ],
   "moduleType": [],
   "keywords": [
     "Angular",

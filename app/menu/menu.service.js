@@ -2,7 +2,7 @@
 
   'use strict';
 
-  angular.module('dateTimePicker')
+  angular.module('smDateTimeRangePicker')
     .factory('menu', [
       '$location',
       function ($location) {
