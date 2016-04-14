@@ -332,7 +332,7 @@ function DateTimePicker($mdUtil,$mdMedia,$document,$timeout,picker){
                 +'             type="text" placeholde="{{lable}}"'
                 +'             aria-label="{{fname}}" data-ng-required="isRequired"'
                 +'             ng-focus="show()" server-error class="sm-input-container">'
-                +'    <div ng-messages="form.fname.$error" ng-if="form[fname].$touched">'
+                +'    <div ng-messages="form[fname].$error" ng-if="form[fname].$touched">'
                 +'    		<div ng-messages-include="{{ngMassagedTempaltePath}}"></div>'
                 +'    </div>'
                 +'    	<div id="picker" class="sm-calender-pane md-whiteframe-15dp">'
@@ -352,11 +352,10 @@ function DateTimePicker($mdUtil,$mdMedia,$document,$timeout,picker){
                 +'  </md-input-container>',
       link :  function(scope,$element,attr){
 
-
         var inputPane = $element[0].querySelector('.sm-input-container');
         var calenderPane = $element[0].querySelector('.sm-calender-pane');
         var cElement = angular.element(calenderPane);
-        scope.ngMassagedTempaltePath =picker.path;
+        scope.ngMassagedTempaltePath =picker.massagePath;
         // check if Pre defined format is supplied
         scope.format = angular.isUndefined(scope.format) ? 'MM-DD-YYYY': scope.format;
         
@@ -457,7 +456,7 @@ function smTimePickerNew($mdUtil,$mdMedia,$document,$timeout,picker){
                 +'             type="text" placeholde="{{lable}}"'
                 +'             aria-label="{{fname}}" data-ng-required="isRequired"'
                 +'             ng-focus="show()" server-error class="sm-input-container">'
-                +'    <div ng-messages="form.fname.$error" ng-if="form[fname].$touched">'
+                +'    <div ng-messages="form[fname].$error" ng-if="form[fname].$touched">'
                 +'    		<div ng-messages-include="{{ngMassagedTempaltePath}}"></div>'
                 +'    </div>'
                 +'    <div id="picker" class="sm-calender-pane md-whiteframe-15dp">'
@@ -479,7 +478,7 @@ function smTimePickerNew($mdUtil,$mdMedia,$document,$timeout,picker){
         var inputPane = $element[0].querySelector('.sm-input-container');
         var calenderPane = $element[0].querySelector('.sm-calender-pane');
         var cElement = angular.element(calenderPane);
-        scope.ngMassagedTempaltePath =picker.path;
+        scope.ngMassagedTempaltePath =picker.massagePath;
         // check if Pre defined format is supplied
         scope.format = angular.isUndefined(scope.format) ? 'MM-DD-YYYY': scope.format;
 

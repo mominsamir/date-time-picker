@@ -8,7 +8,7 @@ angular
   ])
   .config(function ($stateProvider, $urlRouterProvider,$mdThemingProvider,pickerProvider) {
 
-/*    pickerProvider.setMassagePath("test ddd");*/
+    pickerProvider.setMassagePath("error-massages");
 
     pickerProvider.setDayHeader('single');
     
