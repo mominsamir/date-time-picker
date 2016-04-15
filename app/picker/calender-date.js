@@ -387,7 +387,7 @@ function DateTimePicker($mdUtil,$mdMedia,$document,$timeout,picker){
           cElement.removeClass('hide');
           if($mdMedia('sm') ||  $mdMedia('xs')){
             console.log(bodyRect.width);
-            calenderPane.style.left = (bodyRect.width-300)/2+'px';
+            calenderPane.style.left = (bodyRect.width-320)/2+'px';
             calenderPane.style.top =  (bodyRect.height-450)/2+ 'px';
           }else{
             var rect = getVisibleViewPort(elementRect,bodyRect);
@@ -401,8 +401,8 @@ function DateTimePicker($mdUtil,$mdMedia,$document,$timeout,picker){
 
         // calculate visible port to display calender
         function getVisibleViewPort(elementRect,bodyRect){
-          var calenderHeight = 460;
-          var calenderWidth = 296;
+          var calenderHeight = 320;
+          var calenderWidth = 450;
 
           var top =elementRect.top;
           if(elementRect.top +calenderHeight > bodyRect.bottom){
