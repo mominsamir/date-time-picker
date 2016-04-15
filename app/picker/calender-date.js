@@ -330,7 +330,7 @@ function DateTimePicker($mdUtil,$mdMedia,$document,$timeout,picker){
                 +'    <label for="{{fname}}">{{lable }}</label>'
                 +'    <input name="{{fname}}" ng-model="value" ng-readonly="true"'
                 +'             type="text" placeholde="{{lable}}"'
-                +'             aria-label="{{fname}}" data-ng-required="isRequired"'
+                +'             aria-label="{{fname}}" data-ng-required="isRequired" ng-disabled="disable"'
                 +'             ng-focus="show()" server-error class="sm-input-container">'
                 +'    <div ng-messages="form[fname].$error" ng-if="form[fname].$touched">'
                 +'    		<div ng-messages-include="{{ngMassagedTempaltePath}}"></div>'
