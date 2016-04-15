@@ -33,11 +33,11 @@ function DatePickerDir($timeout,picker,$mdMedia,$window){
 				switch(mode) {
 				    case 'date':
 				        scope.view = 'DATE';
-						scope.headerDispalyFormat = "ddd, MMM DD ";				        
+						scope.headerDispalyFormat = picker.customHeader.date;				        
 				        break;
 				    case 'date-time':
 						scope.view = 'DATE'
-						scope.headerDispalyFormat = "ddd, MMM DD HH:mm";			
+						scope.headerDispalyFormat =  picker.customHeader.dateTime;			
 				        break;
 				    case 'time':
 				        scope.view = 'HOUR';

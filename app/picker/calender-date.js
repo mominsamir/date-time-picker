@@ -326,7 +326,7 @@ function DateTimePicker($mdUtil,$mdMedia,$document,$timeout,picker){
         form : '=',
 	    closeOnSelect:"@"
       },
-      template: '  <md-input-container  >'
+      template: '  <md-input-container>'
                 +'    <label for="{{fname}}">{{lable }}</label>'
                 +'    <input name="{{fname}}" ng-model="value" ng-readonly="true"'
                 +'             type="text" placeholde="{{lable}}"'
@@ -355,6 +355,8 @@ function DateTimePicker($mdUtil,$mdMedia,$document,$timeout,picker){
         var inputPane = $element[0].querySelector('.sm-input-container');
         var calenderPane = $element[0].querySelector('.sm-calender-pane');
         var cElement = angular.element(calenderPane);
+
+
         scope.ngMassagedTempaltePath =picker.massagePath;
         // check if Pre defined format is supplied
         scope.format = angular.isUndefined(scope.format) ? 'MM-DD-YYYY': scope.format;
@@ -456,7 +458,7 @@ function smTimePickerNew($mdUtil,$mdMedia,$document,$timeout,picker){
                 +'             type="text" placeholde="{{lable}}"'
                 +'             aria-label="{{fname}}" data-ng-required="isRequired"'
                 +'             ng-focus="show()" server-error class="sm-input-container">'
-                +'    <div ng-messages="form[fname].$error" ng-if="form[fname].$touched">'
+                +'    <div ng-messages="form.fname.$error" ng-if="form[fname].$touched">'
                 +'    		<div ng-messages-include="{{ngMassagedTempaltePath}}"></div>'
                 +'    </div>'
                 +'    <div id="picker" class="sm-calender-pane md-whiteframe-15dp">'
@@ -559,6 +561,11 @@ function picker(){
     var massagePath = "X";
     var cancelLabel = "Cancel";
     var okLabel = "Ok";
+    var customHeader ={
+        date:'ddd, MMM DD',
+        dateTime:'ddd, MMM DD HH:mm',
+        time:'HH:mm',
+    }
 
 
     //date picker configuration
@@ -617,7 +624,18 @@ function picker(){
         },
         setRangeCustomStartEnd : function(array){
             rangeCustomStartEnd = array;
-        },                          
+        },           
+        setCustomHeader : function(obj){
+            if(!angular.isUndefined(obj.date)){
+                customHeader.date= obj.date;
+            }
+            if(!angular.isUndefined(obj.dateTime)){
+                customHeader.dateTime= obj.dateTime;
+            }
+            if(!angular.isUndefined(obj.time)){
+                customHeader.time= obj.time;
+            }                        
+        },               
 		$get: function(){
 			return {
 				massagePath : massagePath,
@@ -627,6 +645,7 @@ function picker(){
                 daysNames : daysNames,
                 monthNames:monthNames,
                 dayHeader :dayHeader,
+                customHeader:customHeader,
 
                 rangeDivider : rangeDivider,
                 rangeCustomStartEnd : rangeCustomStartEnd,
